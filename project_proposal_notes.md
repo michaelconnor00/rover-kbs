@@ -12,8 +12,8 @@ A KBS that dictates a rovers navigation based on known geographic features, as w
 - Changes knowledge of known geography from what is perceived during travels
 - Additional goals are added based on success or failure of tasks
 
-## Different Systems
+### Different Systems
 - Navigation to samples (shorest path, least cost path, updates to known paths)
 - Sensor management (obstical detection, weather monitoring, terrain detection, )
 - Rover Resource management (power, weight, condition...)
--
+
