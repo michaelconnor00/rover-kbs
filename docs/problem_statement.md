@@ -15,7 +15,22 @@ Navigating these obstacles will require some analysis and decision making. Using
 
 The objective of the rover will be to travel to a goal location, to gather samples, and return to the original location. The path will be planned without knowledge of the obstacles, and as the robot travels it will add knowledge of those obstacles to it's database. The obstacles may move...
 
+## Modules
 
+The following are some of the major modules (packages?) that will be needed.
+
+- Grid based GUI
+- Landscape Engine for creating random landscapes (grid with obstacles). Also need static landscape for testing.
+- Inference Engine for decision making.
+    * Knowledge Base class
+- Robot (user) input
+    * Sensor classes
+- Robot (user) output
+    * The robot performs actions
+
+## Action Items
+
+- Define Sensors for inference engine input.
 
 ## Refs
 
