@@ -17,3 +17,5 @@ A KBS that dictates a rovers navigation based on known geographic features, as w
 - Sensor management (obstical detection, weather monitoring, terrain detection, )
 - Rover Resource management (power, weight, condition...)
 
+johnathan  pathing and path planing
+
