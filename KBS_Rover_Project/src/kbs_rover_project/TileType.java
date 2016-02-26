@@ -13,6 +13,6 @@ package kbs_rover_project;
  */
 public enum TileType {
     
-    DIRT, ROCKS_LARGE, ROCKS_SMALL, HOME_BASE, SAMPLE_LOCATION
+    DIRT, ROCKS_LARGE, ROCKS_SMALL, HOME_BASE, SAMPLE_LOCATION, CHASM, CRUST_SAND
     
 }
