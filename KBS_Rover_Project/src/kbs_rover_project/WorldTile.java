@@ -16,8 +16,18 @@ public class WorldTile {
     
     //PRIVATE MEMBER VARIABLES
     private TileType myType;
+    
+    //holds inclination values. This will be randomly generated between 0 and 45
+    //John, you can pick a value to be deemed 'difficult'. Maybe >30 for dirt,
+    //and >20 for rocks?
     private int myInclination;
-    //add more here
+    
+    //CONSTRUCTOR
+    public WorldTile()
+    {
+        myType = TileType.DIRT;
+        myInclination = 0;
+    }
     
     
     //sets tile attributes
@@ -26,5 +36,12 @@ public class WorldTile {
         myType = genType;
         myInclination = inclination;
     }
+    
+    //Returns the type of this tile
+    public TileType getMyType()
+    {
+        return myType;
+    }
+           
     
 }
