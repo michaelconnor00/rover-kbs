@@ -16,13 +16,15 @@ public class WorldTile {
     
     //PRIVATE MEMBER VARIABLES
     private TileType myType;
+    private int myInclination;
     //add more here
     
     
-    //CONSTRUCTORS
-    public WorldTile(TileType genType)
+    //sets tile attributes
+    public void setWorldTile(TileType genType, int inclination)
     {
         myType = genType;
+        myInclination = inclination;
     }
     
 }
