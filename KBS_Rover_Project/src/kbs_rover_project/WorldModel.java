@@ -5,6 +5,9 @@
  */
 package kbs_rover_project;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author Nick Taylor
@@ -15,6 +18,7 @@ public class WorldModel {
     
     //PRIVATE MEMBER VARIABLES
     private WorldTile[] theWorld;
+    Random RNG = new Random();
     
     //GETTERS & SETTERS
     
@@ -40,10 +44,42 @@ public class WorldModel {
     */
     public void initWorld()
     {
-        /**
-         * Design thoughts: do we want the base and surrounding initial zone to always
-         * be the same, then randomize from there?
-         */
+       theWorld = new WorldTile[64];
+    }
+    
+    
+    public WorldTile[] generateRandomWorld(WorldTile[] blankWorld)
+    {
+        
+        int worldSize = blankWorld.length;
+        int blankTiles = worldSize;
+        ArrayList<Integer> placementIndex = new ArrayList<Integer>(worldSize);
+        
+        //Fills ArrayList with all positions in the World array.
+        for(int i = 0; i < worldSize; i++)
+        {
+            placementIndex.add(i);
+        }
+        
+        //Pick location for home base:
+        int baseLocation = RNG.nextInt(worldSize);
+        blankWorld[baseLocation].setWorldTile(TileType.HOME_BASE, 0);
+        blankTiles--;
+        placementIndex.remove(baseLocation);
+        
+        
+        //pick location for one sample
+        //Dev note: we can add more samples later, if we want. Figured starting
+        //with 1 was good enough for now.
+        
+        int sampleLocation = placementIndex.get(RNG.nextInt(placementIndex.size()));
+        blankWorld[sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, 0);
+        blankTiles--;
+        placementIndex.remove(sampleLocation);
+        
+        
+        return blankWorld;
+        
     }
     
 }
