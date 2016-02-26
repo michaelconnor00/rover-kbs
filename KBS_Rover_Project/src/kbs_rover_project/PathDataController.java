@@ -12,6 +12,7 @@ class PathDataController {
     
     public PathDataController(){
         this.dataSource = new HashMap();
+        // TODO Init data for knowledge base
     }
     
     public Action getAction(Path pathKey){

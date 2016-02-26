@@ -12,6 +12,7 @@ class SensorDataController {
     
     public SensorDataController(){
         this.dataSource = new HashMap();
+        // TODO Init data for knowledge base
     }
     
     public Action getAction(Sensor pathKey){
