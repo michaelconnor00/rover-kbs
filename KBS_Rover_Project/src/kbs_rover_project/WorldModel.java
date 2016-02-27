@@ -234,5 +234,13 @@ public class WorldModel {
         return worldString;
     }
     
+    //returns a specific tile in the world via coordinates
+    //takes an integer for both x and y coordinate
+    public WorldTile getTile(int xCoord, int yCoord)
+    {
+        int coordLocation = xCoord + (8 * yCoord);
+        return theWorld[coordLocation];
+    }
+    
 }
 
