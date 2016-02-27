@@ -60,56 +60,74 @@ public class Robot {
     }
     
     
-    //pick witch way to go
+    /*
+     * method picks next diretion to take by first quireing the inferince engine for the posible option scores.
+     * As it quires for each score it adds the tile to the corisponding tile arry
+     * It then takes the highest score returned from the inforince engine amd moves to that spot.
+     * 
+     * note: if two scores are tied for first it will take the first score it got back
+     * 
+     * scores is stored in this order [0,1,2,3]
+     * 
+     * scores are gathered in this order. but one of these is never asked because it is the last position
+     *      |1|
+     *    |2|c|0|
+     *      |3|
+     * 
+     * last position always gets a score of -1
+     */
     public void chooseMove(){
+        //corasponding arrys for chosing the best path
         int[] scores = new int[4];
         WorldTile[] options = new WorldTile[4];
-        int curx,cury;
-        curx=current.getXCoord();
-        cury=current.getYCoord();
+        
+        int currentX,currentY;
+        currentX=current.getXCoord();
+        currentY=current.getYCoord();
         int count=0;
         
-        if(terra.getTile(curx+1,cury)!=last){
+        if(terra.getTile(currentX+1,currentY)!=last){
                  
-                   MoveAction move1    = logicUnit.getNextAction(terra.getTile(curx+1,cury));
-                        scores[count]=move.getScore();
-                options[count]=terra.getTile(curx+1,cury);
+                   MoveAction move1    = logicUnit.getNextAction(terra.getTile(currentX+1,currentY));
+                        scores[count]=move1.getScore();
+                options[count]=terra.getTile(currentX+1,currentY);
                 count++;
         }else{
-            scores[count]=-1;
+            scores[count]=1;
             options[count]=last;
             count++;
         }
-        if(terra.getTile(curx,cury+1)!=last){
-                MoveAction move2 = logicUnit.getNextAction(terra.getTile(curx,cury+1));
+        if(terra.getTile(currentX,currentY+1)!=last){
+                MoveAction move2 = logicUnit.getNextAction(terra.getTile(currentX,currentY+1));
                scores[count]= move2.getScore()  ;
-                options[count]=terra.getTile(curx,cury+1);
+                options[count]=terra.getTile(currentX,currentY+1);
                 count++;
         }else{
-            scores[count]=-1;
+            scores[count]=1;
             options[count]=last;
             count++;
         }
-        if(terra.getTile(curx-1,cury)!=last){
-                 MoveAction move3= logicUnit.getNextAction(terra.getTile(curx-1,cury));
+        if(terra.getTile(currentX-1,currentY)!=last){
+                 MoveAction move3= logicUnit.getNextAction(terra.getTile(currentX-1,currentY));
                  scores[count]=move3.getScore();
-                options[count]=terra.getTile(curx-1,cury);
+                options[count]=terra.getTile(currentX-1,currentY);
                 count++;
         }else{
-            scores[count]=-1;
+            scores[count]=1;
             options[count]=last;
             count++;
         }
-        if(terra.getTile(curx,cury-1)!=last){
-                MoveAction move4= logicUnit.getNextAction(terra.getTile(curx,cury-1));
+        if(terra.getTile(currentX,currentY-1)!=last){
+                MoveAction move4= logicUnit.getNextAction(terra.getTile(currentX,currentY-1));
                 scores[count]=move4.getScore(); 
-                options[count]=terra.getTile(curx,cury-1);
+                options[count]=terra.getTile(currentX,currentY-1);
                 count++;
         }else{
-            scores[count]=-1;
+            scores[count]=1;
             options[count]=last;
             count++;
         }
+        //chouses largest score tie goes to first seen
         int max=0;
         for(int i=0;i<4;i++){
             if(scores[i]>max){
@@ -118,13 +136,33 @@ public class Robot {
         }
         move(options[max]);   
     }
+    
+    /*
+     * moves robot
+     * if to
+     */
+    
     private void move(WorldTile place){
-        last=current;
-        current=place;
+        
+        if(place.isBlocking()){
+            MoveAction move = MoveAction.BLOCKING;
+            
+            
+        }else if(place.isDifficult()){
+            MoveAction move = MoveAction.DIFFICULT;
+            last=current;
+            current=place;
+        }else{
+            MoveAction move = MoveAction.PASSABLE;
+            last=current;
+            current=place; 
+        }
+        
+        
+        
         
         
     }
-    
     
     
 }
