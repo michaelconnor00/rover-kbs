@@ -15,6 +15,7 @@ public class Robot {
     private WorldTile current;
     private WorldTile last;
     
+    
     // constructers
     //given world
     public Robot (WorldModel t){
@@ -56,10 +57,15 @@ public class Robot {
     
     //pick witch way to go
     public void chooseMove(){
-        int[] score = new int[4];
+        int sA,sB,sC;
         
         int curx,cury;
-        curx
+        curx=current.getXCoord();
+        cury=current.getYCoord();
+        
+        if(terra.getTile(curx+1,cury)!=last){
+            sA=Inferince
+        }
         
         
     }
