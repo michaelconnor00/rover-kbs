@@ -21,12 +21,14 @@ public class Robot {
     public Robot (WorldModel t){
         terra=t;
         logicUnit=new InferenceEngine();
+        
     }
     //given world and inital goal
     public Robot (WorldModel t,WorldTile g){
         terra=t;
         goal=g;
-        logicUnit=new InferenceEngine();
+        logicUnit=new InferenceEngine(goal);
+        
     }
     
     
@@ -36,6 +38,7 @@ public class Robot {
     }
     public void setGoal(WorldTile t){
         goal=t;
+        logicUnit=new InferenceEngine(goal);
     }
     public void setCurrentPlace(WorldTile t){
         current=t;
@@ -67,7 +70,9 @@ public class Robot {
         int count=0;
         
         if(terra.getTile(curx+1,cury)!=last){
-                scores[count] = logicUnit.getNextAction(terra.getTile(curx+1,cury));
+                 
+                   MoveAction move1    = logicUnit.getNextAction(terra.getTile(curx+1,cury));
+                        scores[count]=move.getScore();
                 options[count]=terra.getTile(curx+1,cury);
                 count++;
         }else{
@@ -76,7 +81,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(curx,cury+1)!=last){
-                scores[count] = logicUnit.getNextAction(terra.getTile(curx,cury+1));
+                MoveAction move2 = logicUnit.getNextAction(terra.getTile(curx,cury+1));
+               scores[count]= move2.getScore()  ;
                 options[count]=terra.getTile(curx,cury+1);
                 count++;
         }else{
@@ -85,7 +91,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(curx-1,cury)!=last){
-                scores[count] = logicUnit.getNextAction(terra.getTile(curx-1,cury));
+                 MoveAction move3= logicUnit.getNextAction(terra.getTile(curx-1,cury));
+                 scores[count]=move3.getScore();
                 options[count]=terra.getTile(curx-1,cury);
                 count++;
         }else{
@@ -94,7 +101,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(curx,cury-1)!=last){
-                scores[count] = logicUnit.getNextAction(terra.getTile(curx,cury-1));
+                MoveAction move4= logicUnit.getNextAction(terra.getTile(curx,cury-1));
+                scores[count]=move4.getScore(); 
                 options[count]=terra.getTile(curx,cury-1);
                 count++;
         }else{
