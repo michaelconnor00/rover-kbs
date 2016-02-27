@@ -6,19 +6,25 @@ package kbs_rover_project;
  */
 public class InferenceEngine {
     
-    private SensorDataController sensorData;
+    private EnvironmentDataController sensorData;
     
     private PathDataController pathData;
     
     public InferenceEngine(){
-        this.sensorData = new SensorDataController();
+        this.sensorData = new EnvironmentDataController();
         this.pathData = new PathDataController();
     }
     
-    public Action getNextAction(Sensor sensorData, Path pathData){
-        Action nextSensorAction = this.sensorData.getAction(sensorData);
+    /**
+     * Determines a score 
+     * @param environment: data from the sensors, type: WorldTile
+     * @param pathData
+     * @return 
+     */
+    public Action getNextAction(WorldTile environment, Path pathData){
+        Action nextSensorAction = this.sensorData.getAction(environment);
         Action nextPathAction = this.pathData.getAction(pathData);
-        Action nextAction;
+        Action nextAction = null;
         if (true) {
             // determine which action to take.
             
@@ -26,8 +32,8 @@ public class InferenceEngine {
         return nextAction;
     }
     
-    private void addSensorAction(Sensor sensorData, Action newAction){
-        this.sensorData.putAction(sensorData, newAction);
+    private void addSensorAction(WorldTile environment, Action newAction){
+        this.sensorData.putAction(environment, newAction);
     }
     
     private void addPathAction(Path pathData, Action newAction){

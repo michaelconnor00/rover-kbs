@@ -6,20 +6,20 @@ import java.util.HashMap;
  *
  * @author michaelconnor
  */
-class SensorDataController {
+class EnvironmentDataController {
     
-    private HashMap<Sensor, Action> dataSource;
+    private HashMap<WorldTile, Action> dataSource;
     
-    public SensorDataController(){
+    public EnvironmentDataController(){
         this.dataSource = new HashMap();
         // TODO Init data for knowledge base
     }
     
-    public Action getAction(Sensor pathKey){
+    public Action getAction(WorldTile pathKey){
         return this.dataSource.get(pathKey);
     }
     
-    public void putAction(Sensor sensorKey, Action actionValue){
+    public void putAction(WorldTile sensorKey, Action actionValue){
         this.dataSource.put(sensorKey, actionValue);
     }
 }
