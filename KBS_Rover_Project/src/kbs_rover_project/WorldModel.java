@@ -75,8 +75,9 @@ public class WorldModel {
         
         
         //Pick location for home base:
-        int baseLocation = RNG.nextInt(worldSize);
-        blankWorld[baseLocation].setWorldTile(TileType.HOME_BASE, 0);
+        //Design note: always top left
+        int baseLocation = 0;
+        blankWorld[baseLocation].setWorldTile(TileType.HOME_BASE, baseLocation);
         blankTiles--;
         positions[baseLocation] = false;
         
@@ -84,13 +85,10 @@ public class WorldModel {
         //pick location for one sample
         //Dev note: we can add more samples later, if we want. Figured starting
         //with 1 was good enough for now.
+        //Design note: always bottom right
 				
-        int sampleLocation = RNG.nextInt(worldSize);
-        while (positions[sampleLocation] == false) 
-        {
-            sampleLocation = RNG.nextInt(worldSize);
-	}
-        blankWorld[sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, 0);
+        int sampleLocation = 63;
+        blankWorld[sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation);
         blankTiles--;
         positions[sampleLocation] = false;
         
@@ -112,7 +110,7 @@ public class WorldModel {
             {
                 smallRockLocation = RNG.nextInt(worldSize);
             }
-            blankWorld[smallRockLocation].setWorldTile(TileType.ROCKS_SMALL, RNG.nextInt(45));
+            blankWorld[smallRockLocation].setWorldTile(TileType.ROCKS_SMALL, smallRockLocation);
             blankTiles--;
             positions[smallRockLocation] = false;
         }
@@ -127,7 +125,7 @@ public class WorldModel {
             {
                 largeRockLocation = RNG.nextInt(worldSize);
             }
-            blankWorld[largeRockLocation].setWorldTile(TileType.ROCKS_LARGE, RNG.nextInt(45));
+            blankWorld[largeRockLocation].setWorldTile(TileType.ROCKS_LARGE, largeRockLocation);
             blankTiles--;
             positions[largeRockLocation] = false;
         }
@@ -142,7 +140,7 @@ public class WorldModel {
             {
                 chasmLocation = RNG.nextInt(worldSize);
             }
-            blankWorld[chasmLocation].setWorldTile(TileType.CHASM, 0);
+            blankWorld[chasmLocation].setWorldTile(TileType.CHASM, chasmLocation);
             blankTiles--;
             positions[chasmLocation] = false;
         }
@@ -157,7 +155,7 @@ public class WorldModel {
             {
                 crustLocation = RNG.nextInt(worldSize);
             }
-            blankWorld[crustLocation].setWorldTile(TileType.CRUST_SAND, 15);
+            blankWorld[crustLocation].setWorldTile(TileType.CRUST_SAND, crustLocation);
             blankTiles--;
             positions[crustLocation] = false;
         }
@@ -168,7 +166,12 @@ public class WorldModel {
         {
             if(blankWorld[i].getMyType() == TileType.DIRT)
             {
-                blankWorld[i].setWorldTile(TileType.DIRT, RNG.nextInt(45));
+                blankWorld[i].setWorldTile(TileType.DIRT, i);
+            }
+            
+            if((i == 1) || (i == 8) || (i == 55) || (i == 62))
+            {
+                blankWorld[i].setWorldTile(TileType.DIRT, i);
             }
             
         }
