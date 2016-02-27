@@ -56,6 +56,10 @@ public class Robot {
     
     //pick witch way to go
     public void chooseMove(){
+        int[] score = new int[4];
+        
+        int curx,cury;
+        curx
         
         
     }
