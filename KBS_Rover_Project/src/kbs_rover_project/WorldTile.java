@@ -17,6 +17,8 @@ public class WorldTile {
     //PRIVATE MEMBER VARIABLES
     private TileType myType;
     private SurfaceDifficulty myDifficulty;
+    private int xCoord;
+    private int yCoord;
     
     //holds inclination values. This will be randomly generated between 0 and 45
     //John, you can pick a value to be deemed 'difficult'. Maybe >30 for dirt,
@@ -34,9 +36,11 @@ public class WorldTile {
     
     
     //sets tile attributes
-    public void setWorldTile(TileType genType, int inclination)
+    public void setWorldTile(TileType genType, int coordinate)
     {
         myType = genType;
+        xCoord = coordinate % 8;
+        yCoord = coordinate / 8;
         //myInclination = inclination;
         switch(myType)
         {
@@ -45,11 +49,11 @@ public class WorldTile {
                 break;
                 
             case ROCKS_LARGE:
-                    myDifficulty = SurfaceDifficulty.PASSABLE;
+                    myDifficulty = SurfaceDifficulty.BLOCKING;
                 break;
                 
                 case ROCKS_SMALL:
-                    myDifficulty = SurfaceDifficulty.PASSABLE;
+                    myDifficulty = SurfaceDifficulty.DIFFICULT;
                 break;
                 
                 case HOME_BASE:
@@ -61,7 +65,7 @@ public class WorldTile {
                 break;
                 
                 case CHASM:
-                    myDifficulty = SurfaceDifficulty.PASSABLE;
+                    myDifficulty = SurfaceDifficulty.BLOCKING;
                 break;
                 
                 case CRUST_SAND:
@@ -79,6 +83,24 @@ public class WorldTile {
     {
         return myType;
     }
-           
+    
+    //returns the difficulty of this tile
+    public SurfaceDifficulty getMyDifficulty()
+    {
+        return myDifficulty;
+    }
+    
+    //returns x coordinate of this tile
+    public int getXCoord()
+    {
+        return xCoord;
+    }
+         
+    
+    //returns y coordinate of this tile
+    public int getYCoord()
+    {
+        return yCoord;
+    }
     
 }
