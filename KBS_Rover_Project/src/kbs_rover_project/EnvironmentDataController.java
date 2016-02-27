@@ -15,11 +15,11 @@ class EnvironmentDataController {
         // TODO Init data for knowledge base
     }
     
-    public Action getAction(WorldTile pathKey){
+    public MoveAction getAction(WorldTile pathKey){
         return this.dataSource.get(pathKey);
     }
     
-    public void putAction(WorldTile sensorKey, Action actionValue){
+    public void putAction(WorldTile sensorKey, MoveAction actionValue){
         this.dataSource.put(sensorKey, actionValue);
     }
 }

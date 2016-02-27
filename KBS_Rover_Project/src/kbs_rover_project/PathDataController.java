@@ -8,18 +8,18 @@ import java.util.HashMap;
  */
 class PathDataController {
     
-    private HashMap<Path, Action> dataSource;
+    private HashMap<Path, MoveAction> dataSource;
     
     public PathDataController(){
         this.dataSource = new HashMap();
         // TODO Init data for knowledge base
     }
     
-    public Action getAction(Path pathKey){
+    public MoveAction getAction(Path pathKey){
         return this.dataSource.get(pathKey);
     }
     
-    public void putAction(Path pathKey, Action actionValue){
+    public void putAction(Path pathKey, MoveAction actionValue){
         this.dataSource.put(pathKey, actionValue);
     }
 }

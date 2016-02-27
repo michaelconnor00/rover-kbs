@@ -21,10 +21,11 @@ public class InferenceEngine {
      * @param pathData
      * @return 
      */
-    public Action getNextAction(WorldTile environment, Path pathData){
-        Action nextSensorAction = this.sensorData.getAction(environment);
-        Action nextPathAction = this.pathData.getAction(pathData);
-        Action nextAction = null;
+    public MoveAction getNextAction(WorldTile environment){
+        MoveAction nextSensorAction = this.sensorData.getAction(environment);
+        
+//        MoveAction nextPathAction = this.pathData.getAction(pathData);
+        MoveAction nextAction = null;
         if (true) {
             // determine which action to take.
             
@@ -36,7 +37,7 @@ public class InferenceEngine {
         this.sensorData.putAction(environment, newAction);
     }
     
-    private void addPathAction(Path pathData, Action newAction){
+    private void addPathAction(Path pathData, MoveAction newAction){
         this.pathData.putAction(pathData, newAction);
     }
     

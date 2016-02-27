@@ -84,20 +84,18 @@ public class WorldTile {
         return myType;
     }
     
-<<<<<<< HEAD
-    public Boolean isPassable(){
+    public boolean isPassable(){
         return this.myDifficulty == SurfaceDifficulty.PASSABLE;
     }
     
-    public Boolean isBlocking(){
+    public boolean isBlocking(){
         return this.myDifficulty == SurfaceDifficulty.BLOCKING;
     }
     
-    public Boolean isDifficult(){
+    public boolean isDifficult(){
         return this.myDifficulty == SurfaceDifficulty.DIFFICULT;
     }
            
-=======
     //returns the difficulty of this tile
     public SurfaceDifficulty getMyDifficulty()
     {
@@ -116,6 +114,25 @@ public class WorldTile {
     {
         return yCoord;
     }
->>>>>>> d76a704acbf8bde9895a05e3317a123f8686dce2
     
+    
+    @Override
+    public boolean equals(Object obj){
+        boolean is_equal = obj instanceof WorldTile;
+        is_equal = is_equal && ((WorldTile) obj).getXCoord() == this.getXCoord();
+        is_equal = is_equal && ((WorldTile) obj).getYCoord() == this.getYCoord();
+        is_equal = is_equal && ((WorldTile) obj).getMyDifficulty() == this.getMyDifficulty();
+        is_equal = is_equal && ((WorldTile) obj).getMyType() == this.getMyType();
+        return is_equal;
+    }
+    
+    @Override
+    public int hashCode(){
+        int hash = 1;
+        hash = hash * 31 + this.myType.ordinal();
+        hash = hash * 31 + this.myDifficulty.ordinal();
+        hash = hash * 31 + this.getXCoord();
+        hash = hash * 31 + this.getYCoord();
+        return hash;
+    }
 }
