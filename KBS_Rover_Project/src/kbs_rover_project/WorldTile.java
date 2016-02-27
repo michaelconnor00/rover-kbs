@@ -79,6 +79,18 @@ public class WorldTile {
     {
         return myType;
     }
+    
+    public Boolean isPassable(){
+        return this.myDifficulty == SurfaceDifficulty.PASSABLE;
+    }
+    
+    public Boolean isBlocking(){
+        return this.myDifficulty == SurfaceDifficulty.BLOCKING;
+    }
+    
+    public Boolean isDifficult(){
+        return this.myDifficulty == SurfaceDifficulty.DIFFICULT;
+    }
            
     
 }

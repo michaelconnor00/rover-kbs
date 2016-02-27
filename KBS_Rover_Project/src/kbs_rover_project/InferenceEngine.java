@@ -32,7 +32,7 @@ public class InferenceEngine {
         return nextAction;
     }
     
-    private void addSensorAction(WorldTile environment, Action newAction){
+    private void addSensorAction(WorldTile environment, MoveAction newAction){
         this.sensorData.putAction(environment, newAction);
     }
     

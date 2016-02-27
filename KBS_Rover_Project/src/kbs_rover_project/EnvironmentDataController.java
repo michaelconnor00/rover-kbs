@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 class EnvironmentDataController {
     
-    private HashMap<WorldTile, Action> dataSource;
+    private HashMap<WorldTile, MoveAction> dataSource;
     
     public EnvironmentDataController(){
         this.dataSource = new HashMap();
