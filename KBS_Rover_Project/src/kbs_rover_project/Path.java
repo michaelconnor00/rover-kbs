@@ -6,4 +6,5 @@ package kbs_rover_project;
  */
 public class Path {
     
+    
 }
