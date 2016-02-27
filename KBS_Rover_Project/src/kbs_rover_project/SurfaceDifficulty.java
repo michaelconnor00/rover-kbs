@@ -9,14 +9,7 @@ package kbs_rover_project;
  *
  * @author Nick Taylor
  */
-public class MainController {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        worldTesting.createRandomWorld();
-    }
+public enum SurfaceDifficulty {
+    DIFFICULT, PASSABLE, BLOCKING
     
 }
