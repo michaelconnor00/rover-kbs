@@ -18,10 +18,16 @@ public class WorldModel {
     
     
     //CONSTRUCTOR
-    //sets world size to static 64
-    public WorldModel() throws InterruptedException
+    //blank constructor
+    public WorldModel() 
     {
-        initWorld(64);
+        
+    }
+    
+    //constructor that sets world size with parameter
+    public WorldModel(int worldSize)
+    {
+        initWorld(worldSize);
     }
     
     //PRIVATE MEMBER VARIABLES
@@ -49,10 +55,17 @@ public class WorldModel {
     }
     
     
+    public void setTile(int xCoord, int yCoord, WorldTile newTile)
+    {
+        int tileLocation = get1DPosition(xCoord, yCoord);
+        theWorld[tileLocation] = newTile;
+    }
+    
+    
     /*
     Initializes world by populating tiles
     */
-    public void initWorld(int worldSize) throws InterruptedException
+    public void initWorld(int worldSize) 
     {
        theWorld = new WorldTile[worldSize];
        for(int i = 0; i < theWorld.length; i++)
@@ -60,9 +73,12 @@ public class WorldModel {
            theWorld[i] = new WorldTile();
        }
        
-       generateRandomWorld();
-       
-       WorldGUI.runGUI();
+    }
+    
+    
+    public void startGUI() throws InterruptedException
+    {
+        WorldGUI.runGUI();
        Thread.currentThread().sleep(1000);
        gui = WorldGUI.getGUI();
        updateTileIcons();
@@ -99,6 +115,8 @@ public class WorldModel {
         gui.setRoverLocation(tiles[roverLocation]);
     }
     
+    
+    //Works only on 64 size worlds
     public void generateRandomWorld()
     {
         WorldTile[] blankWorld = theWorld;
@@ -287,6 +305,14 @@ public class WorldModel {
         int yCoord = tile.getYCoord();
         
         int position = xCoord + (8 * yCoord);
+        return position;
+    }
+    
+    
+    public int get1DPosition(int x, int y)
+    {
+        int xSize = (int)(Math.sqrt(theWorld.length));
+        int position = x + (xSize * y);
         return position;
     }
     
