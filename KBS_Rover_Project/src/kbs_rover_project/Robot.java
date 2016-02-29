@@ -83,7 +83,8 @@ public class Robot {
      *    |2|R|0|
      *      |3|
      * 
-     * last position always gets a score of -1
+     * last position always gets a score of 0.01
+     * of bourd positions get a score of -1.0
      */
     public void chooseMove() {
         //corasponding arrys for chosing the best path
@@ -163,7 +164,7 @@ public class Robot {
             options[count] = null;
             count++;
         }
-        //chouses largest score tie goes to first seen
+        //chooses largest score tie goes to first seen
         int max = 0;
         for (int i = 0; i < 4; i++) {
             if (scores[i] > max) {
@@ -176,7 +177,7 @@ public class Robot {
 
     /*
      * moves robot
-     * if to
+     * 
      */
     private void move(WorldTile place) {
 
