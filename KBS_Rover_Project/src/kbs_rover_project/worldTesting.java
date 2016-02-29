@@ -12,12 +12,12 @@ package kbs_rover_project;
 public class worldTesting {
     
     //creates a random world from the default random world generation method
-    public static void createRandomWorld()
+    public static void createRandomWorld() throws InterruptedException
     {
         WorldModel model = new WorldModel();
-        model.generateRandomWorld();
-        String testString = model.toString();
-        System.out.print(testString);
+       // model.generateRandomWorld();
+       // String testString = model.toString();
+       // System.out.print(testString);
     }
     
 }

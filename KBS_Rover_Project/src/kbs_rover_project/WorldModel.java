@@ -5,8 +5,8 @@
  */
 package kbs_rover_project;
 
-import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JLabel;
 
 /**
  *
@@ -19,7 +19,7 @@ public class WorldModel {
     
     //CONSTRUCTOR
     //sets world size to static 64
-    public WorldModel()
+    public WorldModel() throws InterruptedException
     {
         initWorld(64);
     }
@@ -27,6 +27,7 @@ public class WorldModel {
     //PRIVATE MEMBER VARIABLES
     private WorldTile[] theWorld;
     Random RNG = new Random();
+    private WorldGUI gui;
     
     //GETTERS & SETTERS
     
@@ -50,15 +51,44 @@ public class WorldModel {
     /*
     Initializes world by populating tiles
     */
-    public void initWorld(int worldSize)
+    public void initWorld(int worldSize) throws InterruptedException
     {
        theWorld = new WorldTile[worldSize];
        for(int i = 0; i < theWorld.length; i++)
        {
            theWorld[i] = new WorldTile();
        }
+       
+       generateRandomWorld();
+       
+       WorldGUI.runGUI();
+       Thread.currentThread().sleep(1000);
+       gui = WorldGUI.getGUI();
+       updateTileIcons();
     }
     
+    
+    public void updateTileIcons()
+    {
+        JLabel[] tiles = gui.getTiles();
+        TileType currentType;
+        
+        for(int i = 0; i < theWorld.length; i++)
+        {
+            currentType = theWorld[i].getMyType();
+            
+            switch(currentType)
+            {
+                case DIRT: gui.setTileIcon(tiles[i], currentType); break;
+                case ROCKS_LARGE: gui.setTileIcon(tiles[i], currentType); break;
+                case ROCKS_SMALL: gui.setTileIcon(tiles[i], currentType); break;
+                case HOME_BASE: gui.setTileIcon(tiles[i], currentType); break;
+                case SAMPLE_LOCATION: gui.setTileIcon(tiles[i], currentType); break;
+                case CHASM: gui.setTileIcon(tiles[i], currentType); break;
+                case CRUST_SAND: gui.setTileIcon(tiles[i], currentType); break;
+            }
+        }
+    }
     
     public void generateRandomWorld()
     {

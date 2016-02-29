@@ -151,16 +151,18 @@ public class Robot {
 
         if (place.isBlocking()) {
             MoveAction move = MoveAction.BLOCKING;
-//            logicUnit.
-
-        } else if (place.isDifficult()) {
+            logicUnit.updateAction(place, move);
+            
+        }else if(place.isDifficult()){
             MoveAction move = MoveAction.DIFFICULT;
-            last = current;
-            current = place;
-        } else {
+            last=current;
+            current=place;
+            logicUnit.updateAction(place, move);
+        }else{
             MoveAction move = MoveAction.PASSABLE;
-            last = current;
-            current = place;
+            last=current;
+            current=place; 
+            logicUnit.updateAction(place, move);
         }
     }
 

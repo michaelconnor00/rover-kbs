@@ -7,7 +7,7 @@
       <Dimension value="[800, 600]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 1024]"/>
+      <Dimension value="[1080, 1080]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -31,6 +31,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jLabel56" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel48" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel40" alignment="0" pref="128" max="32767" attributes="0"/>
                   <Component id="jLabel32" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel24" alignment="0" max="32767" attributes="0"/>
@@ -118,6 +120,46 @@
                       <Component id="jLabel41" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="jLabel42" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel43" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel44" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel45" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel46" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel47" min="-2" pref="128" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel49" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel50" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel51" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel52" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel53" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel54" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel55" min="-2" pref="128" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel57" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel58" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel59" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel60" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel61" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel62" min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="jLabel63" min="-2" pref="128" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -139,17 +181,14 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel8" min="-2" pref="128" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel14" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Component id="jLabel15" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel9" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel10" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel11" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel12" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel13" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel14" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="jLabel15" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -178,18 +217,42 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel32" min="-2" pref="128" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="jLabel33" min="-2" pref="128" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel33" min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel40" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
                           <Component id="jLabel41" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
                           <Component id="jLabel42" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel43" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel44" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel45" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel46" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel47" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="238" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel48" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel49" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel50" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel51" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel52" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel53" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel54" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel55" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel56" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel57" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel58" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel59" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel60" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel61" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel62" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                          <Component id="jLabel63" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -210,218 +273,134 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel0">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel0"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel8"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel9"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel10"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel11"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel12"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel13"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel14"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel15"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel16"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel17"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel18"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel19">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel19"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel20"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel21"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel22">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel22"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel23">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel23"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel24">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel24"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel25">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel25"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel26">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel26"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel27">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel27"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel28">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel28"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel29">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel29"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel30">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel30"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel31">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel31"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel32">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel32"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel33">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel33"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel34">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel34"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel35">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel35"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel36">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel36"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel37">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel37"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel38">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel38"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel39">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel39"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel40">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel40"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel41">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel41"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel42">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel42"/>
-      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel43">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel44">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel45">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel46">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel47">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel48">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel49">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel50">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel51">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel52">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel53">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel54">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel55">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel56">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel57">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel58">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel59">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel60">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel61">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel62">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel63">
     </Component>
   </SubComponents>
 </Form>
