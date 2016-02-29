@@ -6,7 +6,7 @@ package kbs_rover_project;
 
 /**
  *
- * @author johnathan
+ * @author johnathan Raine
  */
 public class Robot {
 
@@ -25,8 +25,10 @@ public class Robot {
 //        
 //    }
     //given world and inital goal
-    public Robot(WorldModel t, WorldTile g) {
+    public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
+        current=s;
+        last=null;
         goal = g;
         logicUnit = new InferenceEngine(goal);
 
@@ -67,9 +69,10 @@ public class Robot {
     }
 
     /*
-     * method picks next diretion to take by first quireing the inferince engine for the posible option scores.
-     * As it quires for each score it adds the tile to the corisponding tile arry
-     * It then takes the highest score returned from the inforince engine amd moves to that spot.
+     * method picks next direction to take by first querying the inference engine for the possible option scores.
+     * As it quires for each score it adds the tile to the corresponding tile array
+     * It then takes the highest score returned from the inference engine and moves to that spot.
+
      * 
      * note: if two scores are tied for first it will take the first score it got back
      * 
@@ -77,7 +80,7 @@ public class Robot {
      * 
      * scores are gathered in this order. but one of these is never asked because it is the last position
      *      |1|
-     *    |2|c|0|
+     *    |2|R|0|
      *      |3|
      * 
      * last position always gets a score of -1
@@ -91,9 +94,9 @@ public class Robot {
         currentX = current.getXCoord();
         currentY = current.getYCoord();
         int count = 0;
-        
+
         //cheaking  first tile index of 0
-        try{
+        try {
             if (terra.getTile(currentX + 1, currentY) != last) {
                 double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
                 scores[count] = move1;
@@ -104,13 +107,13 @@ public class Robot {
                 options[count] = last;
                 count++;
             }
-        }catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             scores[count] = -1.0;
             options[count] = null;
             count++;
         }
         //cheaking second tile index of 1
-        try{
+        try {
             if (terra.getTile(currentX, currentY + 1) != last) {
                 double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
                 scores[count] = move2;
@@ -121,13 +124,13 @@ public class Robot {
                 options[count] = last;
                 count++;
             }
-        }catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             scores[count] = -1.0;
             options[count] = null;
             count++;
         }
         //cheaking second tile index of 2
-        try{
+        try {
             if (terra.getTile(currentX - 1, currentY) != last) {
                 double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
                 scores[count] = move3;
@@ -138,13 +141,13 @@ public class Robot {
                 options[count] = last;
                 count++;
             }
-        }catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             scores[count] = -1.0;
             options[count] = null;
             count++;
         }
         //cheaking second tile index of 3
-        try{
+        try {
             if (terra.getTile(currentX, currentY - 1) != last) {
                 double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
                 scores[count] = move4;
@@ -155,7 +158,7 @@ public class Robot {
                 options[count] = last;
                 count++;
             }
-        }catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             scores[count] = -1.0;
             options[count] = null;
             count++;
@@ -176,10 +179,9 @@ public class Robot {
      * if to
      */
     private void move(WorldTile place) {
-     
-            last=current;
-            current=place;
-            
-    }
 
+        last = current;
+        current = place;
+
+    }
 }
