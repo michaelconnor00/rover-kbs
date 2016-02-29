@@ -15,10 +15,11 @@ package kbs_rover_project;
 public class WorldTile {
     
     //PRIVATE MEMBER VARIABLES
-    private TileType myType;
+    private TileType myType = TileType.DIRT;
     private SurfaceDifficulty myDifficulty;
     private int xCoord;
     private int yCoord;
+    private int boardSize = 8;
     
     //holds inclination values. This will be randomly generated between 0 and 45
     //John, you can pick a value to be deemed 'difficult'. Maybe >30 for dirt,
@@ -26,12 +27,20 @@ public class WorldTile {
     //private int myInclination;
     //Dev note: getting rid of inclination for now
     
-    //CONSTRUCTOR
-    public WorldTile()
-    {
-        myType = TileType.DIRT;
-        //myInclination = 0;
-        
+    //CONSTRUCTORS
+    public WorldTile(){}
+    
+    public WorldTile(TileType tt){
+        this.myType = tt;
+    }
+    
+    public WorldTile(int boardSize){
+        this.boardSize = boardSize;
+    }
+    
+    public WorldTile(TileType tt, int boardSize){
+        this.myType = tt;
+        this.boardSize = boardSize;
     }
     
     
@@ -39,8 +48,8 @@ public class WorldTile {
     public void setWorldTile(TileType genType, int coordinate)
     {
         myType = genType;
-        xCoord = coordinate % 8;
-        yCoord = coordinate / 8;
+        xCoord = coordinate % this.boardSize;
+        yCoord = coordinate / this.boardSize;
         //myInclination = inclination;
         switch(myType)
         {
