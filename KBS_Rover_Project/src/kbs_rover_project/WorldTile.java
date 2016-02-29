@@ -12,8 +12,8 @@ public class WorldTile {
     //PRIVATE MEMBER VARIABLES
     private TileType myType = TileType.DIRT;
     private SurfaceDifficulty myDifficulty;
-    private int xCoord;
-    private int yCoord;
+    private int xCoord = 0;
+    private int yCoord = 0;
     private int boardSize = 8;
     
     //holds inclination values. This will be randomly generated between 0 and 45
