@@ -21,7 +21,7 @@ public class RobotTest {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws InterruptedException {
         
     }
     
@@ -30,89 +30,26 @@ public class RobotTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp()throws InterruptedException {
+        
+        WorldModel grid3x3 = new WorldModel();
+        
     }
     
     @After
     public void tearDown() {
     }
 
-    @Test
-    public void testSetWorld() {
-        System.out.println("setWorld");
-        WorldModel t = null;
-        Robot instance = null;
-        instance.setWorld(t);
-        fail("The test case is a prototype.");
-    }
 
+    
     @Test
-    public void testSetGoal() {
-        System.out.println("setGoal");
-        WorldTile t = null;
-        Robot instance = null;
-        instance.setGoal(t);
-        fail("The test case is a prototype.");
+    public void testOffBourdTiles()throws InterruptedException{
+        System.out.println("test index out of bounds");
+        WorldModel grid2x2 = new WorldModel();
+        WorldTile start = new WorldTile();
+        
+        Robot instance = new Robot(grid2x2,start,null);
     }
-
-    @Test
-    public void testSetCurrentPlace() {
-        System.out.println("setCurrentPlace");
-        WorldTile t = null;
-        Robot instance = null;
-        instance.setCurrentPlace(t);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testSetLastPlace() {
-        System.out.println("setLastPlace");
-        WorldTile t = null;
-        Robot instance = null;
-        instance.setLastPlace(t);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testGetLastPlace() {
-        System.out.println("getLastPlace");
-        Robot instance = null;
-        WorldTile expResult = null;
-        WorldTile result = instance.getLastPlace();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testGetCurrentPlace() {
-        System.out.println("getCurrentPlace");
-        Robot instance = null;
-        WorldTile expResult = null;
-        WorldTile result = instance.getCurrentPlace();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testGetGoal() {
-        System.out.println("getGoal");
-        Robot instance = null;
-        WorldTile expResult = null;
-        WorldTile result = instance.getGoal();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testGetWorld() {
-        System.out.println("getWorld");
-        Robot instance = null;
-        WorldModel expResult = null;
-        WorldModel result = instance.getWorld();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }
-
     @Test
     public void testChooseMove() {
         System.out.println("chooseMove");
