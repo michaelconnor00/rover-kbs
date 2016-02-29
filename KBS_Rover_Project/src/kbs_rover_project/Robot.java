@@ -24,7 +24,7 @@ public class Robot {
 //        logicUnit=new InferenceEngine();
 //        
 //    }
-    //given world and inital goal
+    //given world, start position and inital goal
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
         current=s;
