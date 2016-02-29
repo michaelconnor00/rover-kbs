@@ -20,9 +20,28 @@ public class MainController {
         world.generateRandomWorld();
         world.startGUI();
         Robot rover = new Robot(world, world.getTile(0, 0), world.getTile(7, 7));
-        
+        world.updateRoverLocation(rover.getCurrentPlace());
         //main execution loop
-       // while(rover.g)
+        
+        //going from start to sample location
+        while(rover.atGoal() == false)
+        {
+            rover.chooseMove();
+            world.updateRoverLocation(rover.getCurrentPlace());
+            Thread.currentThread().sleep(1000);
+            System.out.println(rover.getCurrentPlace().getXCoord() + ", " + rover.getCurrentPlace().getYCoord());
+            
+        }
+        
+        //set new goal as home base
+        rover.setGoal(world.getTile(0, 0));
+        
+        //going from sample back to home
+        while(rover.atGoal() == false)
+        {
+            rover.chooseMove();
+            world.updateRoverLocation(rover.getCurrentPlace());
+        }
     }
     
 }
