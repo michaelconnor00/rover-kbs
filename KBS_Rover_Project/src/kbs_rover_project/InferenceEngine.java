@@ -10,17 +10,21 @@ public class InferenceEngine {
     
     private PathDataController pathData;
     
-    private final int goalXCoord;
-    private final int goalYCoord;
+    private int goalXCoord;
+    private int goalYCoord;
     
     private final double previouslyVisitedFactor = 0.5;
     
     public InferenceEngine(WorldTile goalTile){
+        this.initEngine();
+        this.goalXCoord = goalTile.getXCoord();
+        this.goalYCoord = goalTile.getYCoord();
+    }
+    
+    private void initEngine(){
         this.sensorData = new EnvironmentDataController();
         this.pathData = new PathDataController();
         this.initSensorData();
-        this.goalXCoord = goalTile.getXCoord();
-        this.goalYCoord = goalTile.getYCoord();
     }
     
     /**
@@ -59,6 +63,11 @@ public class InferenceEngine {
     
     private void updateSensorAction(WorldTile environment, MoveAction newAction){
         this.sensorData.putAction(environment.getMyType(), newAction);
+    }
+    
+    public void setGoal(WorldTile newGoal){
+        this.goalXCoord = newGoal.getXCoord();
+        this.goalYCoord = newGoal.getYCoord();
     }
     
     /**

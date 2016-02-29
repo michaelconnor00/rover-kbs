@@ -16,11 +16,27 @@ public class InferenceEngineTest {
 //    public InferenceEngineTest() {
 //    }
     
+    private static WorldTile wtGoal;
+    private static WorldTile wtPassable;
+    private static WorldTile wtBlocking;
+    private static WorldTile wtDifficult;
+    private static InferenceEngine testEngine;
+    
     @BeforeClass
     public static void setUpClass() {
-        WorldTile wtBlocking = new WorldTile();
-        wtBlocking.setWorldTile(TileType.DIRT, 0);
-        
+        wtGoal = new WorldTile(TileType.DIRT, 4);
+        wtGoal.setXCoord(3);
+        wtGoal.setYCoord(3);
+        wtPassable = new WorldTile(TileType.DIRT, 4);
+        wtPassable.setXCoord(1);
+        wtPassable.setYCoord(1);
+        wtBlocking = new WorldTile(TileType.ROCKS_LARGE, 4);
+        wtBlocking.setXCoord(1);
+        wtBlocking.setYCoord(1);
+        wtDifficult = new WorldTile(TileType.ROCKS_SMALL, 4);
+        wtDifficult.setXCoord(1);
+        wtDifficult.setYCoord(1);
+        testEngine = new InferenceEngine(wtPassable);
     }
     
 //    @AfterClass
@@ -38,11 +54,10 @@ public class InferenceEngineTest {
     @Test
     public void testGetNextScore() {
         System.out.println("getNextScore");
-        WorldTile environment = null;
         int travelDirection = 0;
         InferenceEngine instance = null;
-        double expResult = 0.0;
-        double result = instance.getNextScore(environment, travelDirection);
+        double expResult = 100.0;
+        double result = instance.getNextScore(wtPassable, travelDirection);
         assertEquals(expResult, result, 0.0);
         fail("The test case is a prototype.");
     }
