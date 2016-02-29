@@ -1,8 +1,5 @@
 package kbs_rover_project;
 
-//import org.junit.After;
-//import org.junit.AfterClass;
-//import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -12,9 +9,6 @@ import static org.junit.Assert.*;
  * @author michaelconnor
  */
 public class InferenceEngineTest {
-    
-//    public InferenceEngineTest() {
-//    }
     
     private static WorldTile wtGoal;
     private static WorldTile wtPassable;
@@ -38,18 +32,6 @@ public class InferenceEngineTest {
         wtDifficult.setYCoord(1);
         testEngine = new InferenceEngine(wtGoal);
     }
-    
-//    @AfterClass
-//    public static void tearDownClass() {
-//    }
-//    
-//    @Before
-//    public void setUp() {
-//    }
-//    
-//    @After
-//    public void tearDown() {
-//    }
     
     private double distToGoal(WorldTile currTile){
         int xdiff = wtGoal.getXCoord() - currTile.getXCoord();
@@ -84,25 +66,5 @@ public class InferenceEngineTest {
         double result = testEngine.getNextScore(wtBlocking, travelDirection);
         assertEquals(expResult, result, 0.0);
     }
-
-//    @Test
-//    public void testUpdateAction() {
-//        System.out.println("updateAction");
-//        WorldTile move = null;
-//        MoveAction newAction = null;
-//        InferenceEngine instance = null;
-//        instance.updateAction(move, newAction);
-//        fail("The test case is a prototype.");
-//    }
-
-//    @Test
-//    public void testAddPathScore() {
-//        System.out.println("addPathScore");
-//        WorldTile currTile = null;
-//        int travelDirection = 0;
-//        InferenceEngine instance = null;
-//        instance.addPathScore(currTile, travelDirection);
-//        fail("The test case is a prototype.");
-//    }
     
 }
