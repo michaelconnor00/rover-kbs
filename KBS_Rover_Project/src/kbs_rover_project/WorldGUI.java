@@ -467,6 +467,15 @@ public class WorldGUI extends javax.swing.JFrame {
             case CRUST_SAND: label.setIcon(new javax.swing.ImageIcon(getClass().getResource("resources/crustSand.png"))); break;
         }
     }
+    
+    /**
+     * Sets the tile to show the rover's location
+     * @param label 
+     */
+    public void setRoverLocation(JLabel label)
+    {
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("resources/rover.png")));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel0;

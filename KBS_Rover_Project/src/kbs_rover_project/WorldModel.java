@@ -28,6 +28,7 @@ public class WorldModel {
     private WorldTile[] theWorld;
     Random RNG = new Random();
     private WorldGUI gui;
+    private Robot rover;
     
     //GETTERS & SETTERS
     
@@ -88,6 +89,14 @@ public class WorldModel {
                 case CRUST_SAND: gui.setTileIcon(tiles[i], currentType); break;
             }
         }
+    }
+    
+    
+    public void updateRoverLocation()
+    {
+        JLabel[] tiles = gui.getTiles();
+        int roverLocation = getTilePosition(rover.getCurrentPlace());
+        gui.setRoverLocation(tiles[roverLocation]);
     }
     
     public void generateRandomWorld()
@@ -270,6 +279,15 @@ public class WorldModel {
     {
         int coordLocation = xCoord + (8 * yCoord);
         return theWorld[coordLocation];
+    }
+    
+    public int getTilePosition(WorldTile tile)
+    {
+        int xCoord = tile.getXCoord();
+        int yCoord = tile.getYCoord();
+        
+        int position = xCoord + (8 * yCoord);
+        return position;
     }
     
 }

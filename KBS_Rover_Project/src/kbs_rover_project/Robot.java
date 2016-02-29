@@ -6,7 +6,7 @@ package kbs_rover_project;
 
 /**
  *
- * @author johnathan
+ * @author johnathan Raine
  */
 public class Robot {
 
@@ -24,9 +24,11 @@ public class Robot {
 //        logicUnit=new InferenceEngine();
 //        
 //    }
-    //given world and inital goal
-    public Robot(WorldModel t, WorldTile g) {
+    //given world, start position and inital goal
+    public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
+        current=s;
+        last=null;
         goal = g;
         logicUnit = new InferenceEngine(goal);
 
@@ -67,9 +69,10 @@ public class Robot {
     }
 
     /*
-     * method picks next diretion to take by first quireing the inferince engine for the posible option scores.
-     * As it quires for each score it adds the tile to the corisponding tile arry
-     * It then takes the highest score returned from the inforince engine amd moves to that spot.
+     * method picks next direction to take by first querying the inference engine for the possible option scores.
+     * As it quires for each score it adds the tile to the corresponding tile array
+     * It then takes the highest score returned from the inference engine and moves to that spot.
+
      * 
      * note: if two scores are tied for first it will take the first score it got back
      * 
@@ -77,10 +80,11 @@ public class Robot {
      * 
      * scores are gathered in this order. but one of these is never asked because it is the last position
      *      |1|
-     *    |2|c|0|
+     *    |2|R|0|
      *      |3|
      * 
-     * last position always gets a score of -1
+     * last position always gets a score of 0.01
+     * of bourd positions get a score of -1.0
      */
     public void chooseMove() {
         //corasponding arrys for chosing the best path
@@ -92,47 +96,75 @@ public class Robot {
         currentY = current.getYCoord();
         int count = 0;
 
-        if (terra.getTile(currentX + 1, currentY) != last) {
-            double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
-            scores[count] = move1;
-            options[count] = terra.getTile(currentX + 1, currentY);
-            count++;
-        } else {
-            scores[count] = 1;
-            options[count] = last;
-            count++;
-        }
-        if (terra.getTile(currentX, currentY + 1) != last) {
-            double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
-            scores[count] = move2;
-            options[count] = terra.getTile(currentX, currentY + 1);
-            count++;
-        } else {
-            scores[count] = 1;
-            options[count] = last;
+        //cheaking  first tile index of 0
+        try {
+            if (terra.getTile(currentX + 1, currentY) != last) {
+                double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
+                scores[count] = move1;
+                options[count] = terra.getTile(currentX + 1, currentY);
+                count++;
+            } else {
+                scores[count] = 0.01;
+                options[count] = last;
+                count++;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            scores[count] = -1.0;
+            options[count] = null;
             count++;
         }
-        if (terra.getTile(currentX - 1, currentY) != last) {
-            double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
-            scores[count] = move3;
-            options[count] = terra.getTile(currentX - 1, currentY);
-            count++;
-        } else {
-            scores[count] = 1;
-            options[count] = last;
-            count++;
-        }
-        if (terra.getTile(currentX, currentY - 1) != last) {
-            double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
-            scores[count] = move4;
-            options[count] = terra.getTile(currentX, currentY - 1);
-            count++;
-        } else {
-            scores[count] = 1;
-            options[count] = last;
+        //cheaking second tile index of 1
+        try {
+            if (terra.getTile(currentX, currentY + 1) != last) {
+                double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
+                scores[count] = move2;
+                options[count] = terra.getTile(currentX, currentY + 1);
+                count++;
+            } else {
+                scores[count] = 0.01;
+                options[count] = last;
+                count++;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            scores[count] = -1.0;
+            options[count] = null;
             count++;
         }
-        //chouses largest score tie goes to first seen
+        //cheaking second tile index of 2
+        try {
+            if (terra.getTile(currentX - 1, currentY) != last) {
+                double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
+                scores[count] = move3;
+                options[count] = terra.getTile(currentX - 1, currentY);
+                count++;
+            } else {
+                scores[count] = 0.01;
+                options[count] = last;
+                count++;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            scores[count] = -1.0;
+            options[count] = null;
+            count++;
+        }
+        //cheaking second tile index of 3
+        try {
+            if (terra.getTile(currentX, currentY - 1) != last) {
+                double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
+                scores[count] = move4;
+                options[count] = terra.getTile(currentX, currentY - 1);
+                count++;
+            } else {
+                scores[count] = 0.01;
+                options[count] = last;
+                count++;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            scores[count] = -1.0;
+            options[count] = null;
+            count++;
+        }
+        //chooses largest score tie goes to first seen
         int max = 0;
         for (int i = 0; i < 4; i++) {
             if (scores[i] > max) {
@@ -145,25 +177,12 @@ public class Robot {
 
     /*
      * moves robot
-     * if to
+     * 
      */
     private void move(WorldTile place) {
 
-        if (place.isBlocking()) {
-            MoveAction move = MoveAction.BLOCKING;
-            logicUnit.updateAction(place, move);
-            
-        }else if(place.isDifficult()){
-            MoveAction move = MoveAction.DIFFICULT;
-            last=current;
-            current=place;
-            logicUnit.updateAction(place, move);
-        }else{
-            MoveAction move = MoveAction.PASSABLE;
-            last=current;
-            current=place; 
-            logicUnit.updateAction(place, move);
-        }
-    }
+        last = current;
+        current = place;
 
+    }
 }
