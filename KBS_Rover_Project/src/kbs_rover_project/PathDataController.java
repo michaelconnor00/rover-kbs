@@ -3,30 +3,31 @@ package kbs_rover_project;
 import java.util.HashMap;
 
 /**
- *
+ * Controller for keeping track of previously visited tiles.
  * @author michaelconnor
  */
 class PathDataController {
     
-    private HashMap<Path, int[]> dataSource;
+    private HashMap<WorldTile, int[]> dataSource;
     
     public PathDataController(){
         this.dataSource = new HashMap();
-        // TODO Init data for knowledge base
     }
     
-    public int[] getAction(Path pathKey){
-        return this.dataSource.get(pathKey);
+    public int[] getHistory(WorldTile key){
+        if (this.dataSource.containsKey(key)){
+            return this.dataSource.get(key);
+        } else {
+            return null;
+        }
     }
     
-    /**
-     * When putting an item, see if 
-     * @param pathKey
-     * @param score 
-     */
-    public void putScores(Path pathKey, int[] scoreArray){
-        this.dataSource.put(pathKey, scoreArray);
+    public void putScores(WorldTile key, int[] scoreArray){
+        this.dataSource.put(key, scoreArray);
     }
     
+    public boolean containsEnv(WorldTile key){
+        return this.dataSource.containsKey(key);
+    }
     
 }

@@ -116,23 +116,23 @@ public class WorldTile {
     }
     
     
-//    @Override
-//    public boolean equals(Object obj){
-//        boolean is_equal = obj instanceof WorldTile;
-//        is_equal = is_equal && ((WorldTile) obj).getXCoord() == this.getXCoord();
-//        is_equal = is_equal && ((WorldTile) obj).getYCoord() == this.getYCoord();
-//        is_equal = is_equal && ((WorldTile) obj).getMyDifficulty() == this.getMyDifficulty();
-//        is_equal = is_equal && ((WorldTile) obj).getMyType() == this.getMyType();
-//        return is_equal;
-//    }
-//    
-//    @Override
-//    public int hashCode(){
-//        int hash = 1;
-//        hash = hash * 31 + this.myType.ordinal();
-//        hash = hash * 31 + this.myDifficulty.ordinal();
-//        hash = hash * 31 + this.getXCoord();
-//        hash = hash * 31 + this.getYCoord();
-//        return hash;
-//    }
+    @Override
+    public boolean equals(Object obj){
+        boolean is_equal = obj instanceof WorldTile;
+        is_equal = is_equal && ((WorldTile) obj).getXCoord() == this.getXCoord();
+        is_equal = is_equal && ((WorldTile) obj).getYCoord() == this.getYCoord();
+        is_equal = is_equal && ((WorldTile) obj).getMyDifficulty() == this.getMyDifficulty();
+        is_equal = is_equal && ((WorldTile) obj).getMyType() == this.getMyType();
+        return is_equal;
+    }
+    
+    @Override
+    public int hashCode(){
+        int hash = 1;
+        hash = hash * 31 + this.myType.ordinal();
+        hash = hash * 31 + this.myDifficulty.ordinal();
+        hash = hash * 31 + this.getXCoord();
+        hash = hash * 31 + this.getYCoord();
+        return hash;
+    }
 }
