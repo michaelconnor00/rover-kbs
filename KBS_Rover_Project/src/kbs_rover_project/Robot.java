@@ -51,7 +51,7 @@ public class Robot {
     public void setLastPlace(WorldTile t) {
         last = t;
     }
-
+    
     public WorldTile getLastPlace() {
         return last;
     }
@@ -66,6 +66,9 @@ public class Robot {
 
     public WorldModel getWorld() {
         return terra;
+    }
+    public boolean atGoal(){
+        return goal.equals(current);
     }
 
     /*
