@@ -67,9 +67,12 @@ public class WorldModel {
     public void initWorld(int worldSize) 
     {
        theWorld = new WorldTile[worldSize];
+       WorldTile currentTile;
        for(int i = 0; i < theWorld.length; i++)
        {
-           theWorld[i] = new WorldTile();
+           currentTile = new WorldTile();
+           currentTile.setWorldTile(TileType.DIRT, i);
+           theWorld[i] = currentTile;
        }
        
     }
@@ -294,7 +297,7 @@ public class WorldModel {
     //takes an integer for both x and y coordinate
     public WorldTile getTile(int xCoord, int yCoord)
     {
-        int coordLocation = xCoord + (8 * yCoord);
+        int coordLocation = xCoord + ((int)(Math.sqrt(theWorld.length)) * yCoord);
         return theWorld[coordLocation];
     }
     
