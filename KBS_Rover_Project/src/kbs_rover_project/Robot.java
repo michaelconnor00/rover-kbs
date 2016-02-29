@@ -18,11 +18,11 @@ public class Robot {
     
     // constructers
     //given world
-    public Robot (WorldModel t){
-        terra=t;
-        logicUnit=new InferenceEngine();
-        
-    }
+//    public Robot (WorldModel t){
+//        terra=t;
+//        logicUnit=new InferenceEngine();
+//        
+//    }
     //given world and inital goal
     public Robot (WorldModel t,WorldTile g){
         terra=t;
@@ -88,7 +88,7 @@ public class Robot {
         
         if(terra.getTile(currentX+1,currentY)!=last){
                  
-                   MoveAction move1    = logicUnit.getNextAction(terra.getTile(currentX+1,currentY));
+                   MoveAction move1    = logicUnit.getNextScore(terra.getTile(currentX+1,currentY));
                         scores[count]=move1.getScore();
                 options[count]=terra.getTile(currentX+1,currentY);
                 count++;
@@ -98,7 +98,7 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX,currentY+1)!=last){
-                MoveAction move2 = logicUnit.getNextAction(terra.getTile(currentX,currentY+1));
+                MoveAction move2 = logicUnit.getNextScore(terra.getTile(currentX,currentY+1));
                scores[count]= move2.getScore()  ;
                 options[count]=terra.getTile(currentX,currentY+1);
                 count++;
@@ -108,7 +108,7 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX-1,currentY)!=last){
-                 MoveAction move3= logicUnit.getNextAction(terra.getTile(currentX-1,currentY));
+                 MoveAction move3= logicUnit.getNextScore(terra.getTile(currentX-1,currentY));
                  scores[count]=move3.getScore();
                 options[count]=terra.getTile(currentX-1,currentY);
                 count++;
@@ -118,7 +118,7 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX,currentY-1)!=last){
-                MoveAction move4= logicUnit.getNextAction(terra.getTile(currentX,currentY-1));
+                MoveAction move4= logicUnit.getNextScore(terra.getTile(currentX,currentY-1));
                 scores[count]=move4.getScore(); 
                 options[count]=terra.getTile(currentX,currentY-1);
                 count++;
