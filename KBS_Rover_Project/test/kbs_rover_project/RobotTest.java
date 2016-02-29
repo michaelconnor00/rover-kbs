@@ -47,7 +47,10 @@ public class RobotTest {
         System.out.println("test index out of bounds");
         WorldModel grid2x2 = new WorldModel();
         WorldTile start = new WorldTile();
-        
+        WorldTile rock = new WorldTile(TileType.ROCKS_LARGE);
+        WorldTile place = new WorldTile();
+        grid2x2.setTile(0, 0, start);
+        grid2x2.setTile(0, 0, start);
         Robot instance = new Robot(grid2x2,start,null);
     }
     @Test

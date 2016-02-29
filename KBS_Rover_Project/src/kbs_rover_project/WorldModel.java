@@ -34,7 +34,6 @@ public class WorldModel {
     private WorldTile[] theWorld;
     Random RNG = new Random();
     private WorldGUI gui;
-    private Robot rover;
     
     //GETTERS & SETTERS
     
@@ -78,7 +77,7 @@ public class WorldModel {
     
     public void startGUI() throws InterruptedException
     {
-        WorldGUI.runGUI();
+       WorldGUI.runGUI();
        Thread.currentThread().sleep(1000);
        gui = WorldGUI.getGUI();
        updateTileIcons();
@@ -108,11 +107,11 @@ public class WorldModel {
     }
     
     
-    public void updateRoverLocation()
+    public void updateRoverLocation(WorldTile roverLocation)
     {
         JLabel[] tiles = gui.getTiles();
-        int roverLocation = getTilePosition(rover.getCurrentPlace());
-        gui.setRoverLocation(tiles[roverLocation]);
+        int location = getTilePosition(roverLocation);
+        gui.setRoverLocation(tiles[location]);
     }
     
     
