@@ -43,7 +43,7 @@ public class InferenceEngine {
                 environment.getXCoord(), environment.getYCoord()
         );
         
-        if (history != null || history[travelDirection] == 1){
+        if (history.length > 0 && history[travelDirection] == 1){
             // Tile has been visited. reduce score to increase chance no to 
             // take the same previous path.
             return nextScore * previouslyVisitedFactor;
@@ -58,7 +58,10 @@ public class InferenceEngine {
     }
     
     private double distanceToGoal(int x, int y){
-        return Math.sqrt(Math.pow((double) x, 2) + Math.pow((double) y, 2));
+        return Math.sqrt(
+            Math.pow((double) (this.goalXCoord - x), 2) + 
+            Math.pow((double) (this.goalYCoord - y), 2)
+        );
     }
     
     private void updateSensorAction(WorldTile environment, MoveAction newAction){

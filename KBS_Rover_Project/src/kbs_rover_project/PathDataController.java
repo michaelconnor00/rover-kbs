@@ -18,7 +18,7 @@ class PathDataController {
         if (this.dataSource.containsKey(key)){
             return this.dataSource.get(key);
         } else {
-            return null;
+            return new int[0];
         }
     }
     
