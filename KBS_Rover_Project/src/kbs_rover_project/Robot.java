@@ -16,7 +16,7 @@ public class Robot {
     private WorldTile current;
     private WorldTile last;
     private InferenceEngine logicUnit;
-
+            WorldTile[] options;//allows persistance for testing
     // constructers
     //given world
 //    public Robot (WorldModel t){
@@ -28,10 +28,10 @@ public class Robot {
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
         current=s;
-        last=null;
+        last=s;
         goal = g;
         logicUnit = new InferenceEngine(goal);
-
+        
     }
 
     // geters and setrs
@@ -169,8 +169,10 @@ public class Robot {
         }
         //chooses largest score tie goes to first seen
         int max = 0;
+        double maxFound=0;
         for (int i = 0; i < 4; i++) {
-            if (scores[i] > max) {
+            if (scores[i] > maxFound) {
+                maxFound=scores[i];
                 max = i;
             }
         }
