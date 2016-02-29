@@ -43,7 +43,7 @@ public class InferenceEngine {
         return Math.sqrt(Math.pow((double) x, 2) + Math.pow((double) y, 2));
     }
     
-    private void addSensorAction(WorldTile environment, MoveAction newAction){
+    private void updateSensorAction(WorldTile environment, MoveAction newAction){
         this.sensorData.putAction(environment.getMyType(), newAction);
     }
     

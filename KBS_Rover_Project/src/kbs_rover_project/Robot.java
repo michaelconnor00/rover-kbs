@@ -78,7 +78,7 @@ public class Robot {
      */
     public void chooseMove(){
         //corasponding arrys for chosing the best path
-        int[] scores = new int[4];
+        double[] scores = new double[4];
         WorldTile[] options = new WorldTile[4];
         
         int currentX,currentY;
@@ -88,8 +88,8 @@ public class Robot {
         
         if(terra.getTile(currentX+1,currentY)!=last){
                  
-                   MoveAction move1    = logicUnit.getNextScore(terra.getTile(currentX+1,currentY));
-                        scores[count]=move1.getScore();
+                   double move1    = logicUnit.getNextScore(terra.getTile(currentX+1,currentY));
+                        scores[count]=move1;
                 options[count]=terra.getTile(currentX+1,currentY);
                 count++;
         }else{
@@ -98,8 +98,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX,currentY+1)!=last){
-                MoveAction move2 = logicUnit.getNextScore(terra.getTile(currentX,currentY+1));
-               scores[count]= move2.getScore()  ;
+                double move2 = logicUnit.getNextScore(terra.getTile(currentX,currentY+1));
+               scores[count]= move2;
                 options[count]=terra.getTile(currentX,currentY+1);
                 count++;
         }else{
@@ -108,8 +108,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX-1,currentY)!=last){
-                 MoveAction move3= logicUnit.getNextScore(terra.getTile(currentX-1,currentY));
-                 scores[count]=move3.getScore();
+                 double move3= logicUnit.getNextScore(terra.getTile(currentX-1,currentY));
+                 scores[count]=move3;
                 options[count]=terra.getTile(currentX-1,currentY);
                 count++;
         }else{
@@ -118,8 +118,8 @@ public class Robot {
             count++;
         }
         if(terra.getTile(currentX,currentY-1)!=last){
-                MoveAction move4= logicUnit.getNextScore(terra.getTile(currentX,currentY-1));
-                scores[count]=move4.getScore(); 
+                double move4= logicUnit.getNextScore(terra.getTile(currentX,currentY-1));
+                scores[count]=move4; 
                 options[count]=terra.getTile(currentX,currentY-1);
                 count++;
         }else{
@@ -146,7 +146,7 @@ public class Robot {
         
         if(place.isBlocking()){
             MoveAction move = MoveAction.BLOCKING;
-            logicUnit.
+//            logicUnit.
             
         }else if(place.isDifficult()){
             MoveAction move = MoveAction.DIFFICULT;
