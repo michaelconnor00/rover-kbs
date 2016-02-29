@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kbs_rover_project;
 
 /**
@@ -110,20 +105,26 @@ public class WorldTile {
     {
         return myDifficulty;
     }
+
+    public void setXCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public void setYCoord(int yCoord) {
+        this.yCoord = yCoord;
+    }
     
     //returns x coordinate of this tile
     public int getXCoord()
     {
         return xCoord;
     }
-         
     
     //returns y coordinate of this tile
     public int getYCoord()
     {
         return yCoord;
     }
-    
     
     @Override
     public boolean equals(Object obj){
