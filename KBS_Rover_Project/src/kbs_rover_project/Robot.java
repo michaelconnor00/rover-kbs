@@ -41,7 +41,7 @@ public class Robot {
 
     public void setGoal(WorldTile t) {
         goal = t;
-        logicUnit = new InferenceEngine(goal);
+        logicUnit.setGoal(t);
     }
 
     public void setCurrentPlace(WorldTile t) {
@@ -98,7 +98,7 @@ public class Robot {
 
         //cheaking  first tile index of 0
         try {
-            if (terra.getTile(currentX + 1, currentY) != last) {
+            if (terra.getTile(currentX + 1, currentY).equals(last) ) {
                 double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
                 scores[count] = move1;
                 options[count] = terra.getTile(currentX + 1, currentY);
@@ -115,7 +115,7 @@ public class Robot {
         }
         //cheaking second tile index of 1
         try {
-            if (terra.getTile(currentX, currentY + 1) != last) {
+            if (terra.getTile(currentX, currentY + 1).equals(last)) {
                 double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
                 scores[count] = move2;
                 options[count] = terra.getTile(currentX, currentY + 1);
@@ -132,7 +132,7 @@ public class Robot {
         }
         //cheaking second tile index of 2
         try {
-            if (terra.getTile(currentX - 1, currentY) != last) {
+            if (terra.getTile(currentX - 1, currentY).equals(last)) {
                 double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
                 scores[count] = move3;
                 options[count] = terra.getTile(currentX - 1, currentY);
@@ -149,7 +149,7 @@ public class Robot {
         }
         //cheaking second tile index of 3
         try {
-            if (terra.getTile(currentX, currentY - 1) != last) {
+            if (terra.getTile(currentX, currentY - 1).equals(last)) {
                 double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
                 scores[count] = move4;
                 options[count] = terra.getTile(currentX, currentY - 1);
