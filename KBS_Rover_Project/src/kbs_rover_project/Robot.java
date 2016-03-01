@@ -1,3 +1,4 @@
+
 /*
  * used to feed senser data to infernice engine
  * will move based on input
@@ -184,3 +185,4 @@ public class Robot {
 
     }
 }
+
