@@ -16,26 +16,28 @@ import javax.swing.JLabel;
  */
 public class WorldModel {
     
-    
-    //CONSTRUCTOR
-    //blank constructor
-    public WorldModel() 
-    {
-        
-    }
-    
-    //constructor that sets world size with parameter
-    public WorldModel(int worldSize)
-    {
-        initWorld(worldSize);
-    }
-    
     //PRIVATE MEMBER VARIABLES
     private WorldTile[] theWorld;
     Random RNG = new Random();
     private WorldGUI gui;
+    private int worldSize;
+    
+    //CONSTRUCTORS
+    //constructor that sets world size with parameter
+    public WorldModel(int worldSize, boolean doInit) {
+        this.worldSize = worldSize;
+        if(doInit){
+            this.initWorld(worldSize);
+        }
+        
+    }
     
     //GETTERS & SETTERS
+
+    public int getWorldDim() {
+        // NOTE: this only works because the world is SQUARE
+        return (int) Math.sqrt(worldSize);
+    }
     
     /*
     Returns the array holding all WorldTiles
@@ -57,6 +59,7 @@ public class WorldModel {
     public void setTile(int xCoord, int yCoord, WorldTile newTile)
     {
         int tileLocation = get1DPosition(xCoord, yCoord);
+        newTile.setWorldTile(newTile.getMyType(), tileLocation);
         theWorld[tileLocation] = newTile;
     }
     
@@ -70,7 +73,7 @@ public class WorldModel {
        WorldTile currentTile;
        for(int i = 0; i < theWorld.length; i++)
        {
-           currentTile = new WorldTile();
+           currentTile = new WorldTile(); // defaults to size 8
            currentTile.setWorldTile(TileType.DIRT, i);
            theWorld[i] = currentTile;
        }

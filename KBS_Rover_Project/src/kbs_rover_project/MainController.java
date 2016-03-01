@@ -16,7 +16,7 @@ public class MainController {
      */
     public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
-        WorldModel world = new WorldModel(64);
+        WorldModel world = new WorldModel(64, true);
         world.generateRandomWorld();
         world.startGUI();
         Robot rover = new Robot(world, world.getTile(0, 0), world.getTile(7, 7));

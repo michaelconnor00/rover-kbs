@@ -11,7 +11,7 @@ package kbs_rover_project;
 public class Robot {
 
     //private varables
-    private WorldModel terra;
+    private WorldModel world;
     private WorldTile goal;
     private WorldTile current;
     private WorldTile last;
@@ -19,7 +19,7 @@ public class Robot {
 
     //given world, start position and inital goal
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
-        terra = t;
+        world = t;
         current=s;
         last=s;
         goal = g;
@@ -29,7 +29,7 @@ public class Robot {
 
     // geters and setrs
     public void setWorld(WorldModel t) {
-        terra = t;
+        world = t;
     }
 
     public void setGoal(WorldTile t) {
@@ -58,10 +58,23 @@ public class Robot {
     }
 
     public WorldModel getWorld() {
-        return terra;
+        return world;
     }
+    
     public boolean atGoal(){
         return goal.equals(current);
+    }
+    
+    private int getNextCoord(int curr, int offset){
+        // NOTE: this is only applicable for SQUARE worlds!
+        // return -1 if out of bounds
+        int newCoord = curr + offset;
+        int dim = world.getWorldDim();
+        if (newCoord >= dim){
+            return -1; // out of bounds
+        } else {
+            return newCoord;
+        }
     }
 
     /*
@@ -84,103 +97,62 @@ public class Robot {
      */
     public void chooseMove() {
         //corasponding arrys for chosing the best path
-        double[] scores = new double[4];
-        WorldTile[] options = new WorldTile[4];
+        double[] neighborScores = new double[4];
+        WorldTile[] tileOptions = new WorldTile[4];
 
-        int currentX, currentY;
-        currentX = current.getXCoord();
-        currentY = current.getYCoord();
-        int count = 0;
+        int currentX = current.getXCoord();
+        int currentY = current.getYCoord();
+        
+        int[][] coordOffsetTuples = {
+            {1,0}, {0,1}, {-1,0}, {0,-1}
+        };
 
-        //cheaking  first tile index of 0
-        try {
-            if (!terra.getTile(currentX + 1, currentY).equals(last) ) {
-                double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
-                scores[count] = move1;
-                options[count] = terra.getTile(currentX + 1, currentY);
-                count++;
+        for (int j = 0; j < neighborScores.length; j++) {
+            int xCoord = getNextCoord(currentX, coordOffsetTuples[j][0]);
+            int yCoord = getNextCoord(currentY, coordOffsetTuples[j][1]);
+            
+            // getNextCoord will return -1 if out of bounds
+            boolean coordsOutOfBounds = xCoord < 0 || yCoord < 0;
+                    
+            if (coordsOutOfBounds){
+                // Out of Bounds, treat as blocking.
+                neighborScores[j] = -0.1;
+                tileOptions[j] = null; // really, null??
+            } else if (!world.getTile(xCoord, yCoord).equals(last)) {
+                neighborScores[j] = logicUnit.getNextScore(
+                        world.getTile(xCoord, yCoord), 0);
+                tileOptions[j] = world.getTile(xCoord, yCoord);
             } else {
-                scores[count] = 0.01;
-                options[count] = last;
-                count++;
+                // Previous location,
+                // sufficiently low to reduce chance of going backwards
+                neighborScores[j] = 0.1; 
+                tileOptions[j] = last;
             }
-        } catch (IndexOutOfBoundsException e) {
-            scores[count] = -1.0;
-            options[count] = null;
-            count++;
         }
-        //cheaking second tile index of 1
-        try {
-            if (!terra.getTile(currentX, currentY + 1).equals(last)) {
-                double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
-                scores[count] = move2;
-                options[count] = terra.getTile(currentX, currentY + 1);
-                count++;
-            } else {
-                scores[count] = 0.01;
-                options[count] = last;
-                count++;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            scores[count] = -1.0;
-            options[count] = null;
-            count++;
-        }
-        //cheaking second tile index of 2
-        try {
-            if (!terra.getTile(currentX - 1, currentY).equals(last)) {
-                double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
-                scores[count] = move3;
-                options[count] = terra.getTile(currentX - 1, currentY);
-                count++;
-            } else {
-                scores[count] = 0.01;
-                options[count] = last;
-                count++;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            scores[count] = -1.0;
-            options[count] = null;
-            count++;
-        }
-        //cheaking second tile index of 3
-        try {
-            if (!terra.getTile(currentX, currentY - 1).equals(last)) {
-                double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
-                scores[count] = move4;
-                options[count] = terra.getTile(currentX, currentY - 1);
-                count++;
-            } else {
-                scores[count] = 0.01;
-                options[count] = last;
-                count++;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            scores[count] = -1.0;
-            options[count] = null;
-            count++;
-        }
+        
         //chooses largest score tie goes to first seen
         double max = 0;
         int maxIndex = 0;
         for (int i = 0; i < 4; i++) {
-            if (scores[i] > max) {
-                max = scores[i];
+            if (neighborScores[i] > max && tileOptions[i] != null) {
+                max = neighborScores[i];
                 maxIndex = i;
             }
         }
-        move(options[maxIndex]);
-        logicUnit.addPathScore(options[maxIndex], maxIndex);
+        
+        // Make sure there was a score over 0.0
+        if (max > 0.0){
+            move(tileOptions[maxIndex]);
+            logicUnit.addPathScore(tileOptions[maxIndex], maxIndex);
+        } // else, don't make a move.
+
     }
 
     /*
      * moves robot
-     * 
      */
     private void move(WorldTile place) {
-
         last = current;
         current = place;
-
     }
 }
