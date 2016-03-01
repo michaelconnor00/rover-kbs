@@ -17,18 +17,11 @@ public class Robot {
     private WorldTile last;
     private InferenceEngine logicUnit;
 
-    // constructers
-    //given world
-//    public Robot (WorldModel t){
-//        terra=t;
-//        logicUnit=new InferenceEngine();
-//        
-//    }
     //given world, start position and inital goal
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
         current=s;
-        last=null;
+        last=s;
         goal = g;
         logicUnit = new InferenceEngine(goal);
 
@@ -101,7 +94,7 @@ public class Robot {
 
         //cheaking  first tile index of 0
         try {
-            if (terra.getTile(currentX + 1, currentY).equals(last) ) {
+            if (!terra.getTile(currentX + 1, currentY).equals(last) ) {
                 double move1 = logicUnit.getNextScore(terra.getTile(currentX + 1, currentY), 0);
                 scores[count] = move1;
                 options[count] = terra.getTile(currentX + 1, currentY);
@@ -118,7 +111,7 @@ public class Robot {
         }
         //cheaking second tile index of 1
         try {
-            if (terra.getTile(currentX, currentY + 1).equals(last)) {
+            if (!terra.getTile(currentX, currentY + 1).equals(last)) {
                 double move2 = logicUnit.getNextScore(terra.getTile(currentX, currentY + 1), 1);
                 scores[count] = move2;
                 options[count] = terra.getTile(currentX, currentY + 1);
@@ -135,7 +128,7 @@ public class Robot {
         }
         //cheaking second tile index of 2
         try {
-            if (terra.getTile(currentX - 1, currentY).equals(last)) {
+            if (!terra.getTile(currentX - 1, currentY).equals(last)) {
                 double move3 = logicUnit.getNextScore(terra.getTile(currentX - 1, currentY), 2);
                 scores[count] = move3;
                 options[count] = terra.getTile(currentX - 1, currentY);
@@ -152,7 +145,7 @@ public class Robot {
         }
         //cheaking second tile index of 3
         try {
-            if (terra.getTile(currentX, currentY - 1).equals(last)) {
+            if (!terra.getTile(currentX, currentY - 1).equals(last)) {
                 double move4 = logicUnit.getNextScore(terra.getTile(currentX, currentY - 1), 3);
                 scores[count] = move4;
                 options[count] = terra.getTile(currentX, currentY - 1);
@@ -168,14 +161,16 @@ public class Robot {
             count++;
         }
         //chooses largest score tie goes to first seen
-        int max = 0;
+        double max = 0;
+        int maxIndex = 0;
         for (int i = 0; i < 4; i++) {
             if (scores[i] > max) {
-                max = i;
+                max = scores[i];
+                maxIndex = i;
             }
         }
-        move(options[max]);
-        logicUnit.addPathScore(options[max], max);
+        move(options[maxIndex]);
+        logicUnit.addPathScore(options[maxIndex], maxIndex);
     }
 
     /*
