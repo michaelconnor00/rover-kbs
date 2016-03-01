@@ -29,6 +29,8 @@ public class MainController {
             rover.chooseMove();
             world.updateRoverLocation(rover.getCurrentPlace());
             Thread.currentThread().sleep(1000);
+            world.updateTileIcons();
+            
             System.out.println(rover.getCurrentPlace().getXCoord() + ", " + rover.getCurrentPlace().getYCoord());
             
         }
@@ -41,6 +43,8 @@ public class MainController {
         {
             rover.chooseMove();
             world.updateRoverLocation(rover.getCurrentPlace());
+            Thread.currentThread().sleep(1000);
+            world.updateTileIcons();
         }
     }
     
