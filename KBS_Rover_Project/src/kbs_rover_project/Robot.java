@@ -16,7 +16,18 @@ public class Robot {
     private WorldTile current;
     private WorldTile last;
     private InferenceEngine logicUnit;
+<<<<<<< HEAD
 
+=======
+            WorldTile[] options;//allows persistance for testing
+    // constructers
+    //given world
+//    public Robot (WorldModel t){
+//        terra=t;
+//        logicUnit=new InferenceEngine();
+//        
+//    }
+>>>>>>> 9a775c182351941e8ffb0cf4a7252e70eb423e99
     //given world, start position and inital goal
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
         terra = t;
@@ -24,7 +35,7 @@ public class Robot {
         last=s;
         goal = g;
         logicUnit = new InferenceEngine(goal);
-
+        
     }
 
     // geters and setrs
