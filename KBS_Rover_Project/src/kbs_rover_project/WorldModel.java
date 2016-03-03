@@ -355,6 +355,26 @@ public class WorldModel {
     }
     
     
+    /*
+    causes a "rockslide" to occur, adding new large rock terrain 
+    to add difficulty to a returning path
+    */
+    public void causeRockslide(int rocksToAdd)
+    {
+        for(int i = 0; i < rocksToAdd; i++)
+        {
+            int nextTile = RNG.nextInt(theWorld.length-3);
+            //ensures the new rocks do not block the sample or home base
+            while(!theWorld[nextTile].getMyType().equals(TileType.DIRT) || 
+                    nextTile != 1)
+            {
+                nextTile = RNG.nextInt(theWorld.length-3);
+            }
+            
+            theWorld[nextTile].setWorldTile(TileType.ROCKS_LARGE, get1DPosition(theWorld[nextTile].getXCoord(), theWorld[nextTile].getYCoord()));
+        }
+    }
+    
     @Override
     public String toString()
     {
@@ -417,6 +437,7 @@ public class WorldModel {
         return theWorld[coordLocation];
     }
     
+    //NOTE only works for board size 64, antiquated method
     public int getTilePosition(WorldTile tile)
     {
         int xCoord = tile.getXCoord();
