@@ -1,9 +1,11 @@
 
 package kbs_rover_project;
 
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +20,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
+    private Button buttonRestart;
+    private VBox sideBar;
+    private GridPane boardGrid;
+    private int boardSize = 8;
+    private int complexity = 1;
+    ArrayList<TextField> newInputs = new ArrayList<>();
+    
     @Override 
     public void start(Stage stage) {
         stage.setTitle("KBS Rover");
@@ -25,8 +34,11 @@ public class Main extends Application {
         HBox mainGroup = new HBox();
         mainGroup.setAlignment(Pos.TOP_LEFT);
         
-        mainGroup.getChildren().add(addVBox());
-        mainGroup.getChildren().add(addGridPane(16, 830.0));
+        sideBar = addVBox();
+        boardGrid = addGridPane(boardSize, 830.0);
+        
+        mainGroup.getChildren().add(sideBar);
+        mainGroup.getChildren().add(boardGrid);
         
         Scene scene = new Scene(mainGroup);
         
@@ -35,18 +47,22 @@ public class Main extends Application {
         stage.show();
     }
     
-    private VBox addInput(String label, String defValue){
+    private VBox addInput(String label, String defValue, String getID){
         VBox vbox = new VBox();
         vbox.setPrefWidth(150);
         vbox.setSpacing(7);   // Gap between nodes
         
-        Label sizeLabel = new Label(label);
-        sizeLabel.setWrapText(true);
-        sizeLabel.setTextAlignment(TextAlignment.CENTER);
-        TextField sizeTextField = new TextField(defValue);
-        sizeTextField.setAlignment(Pos.CENTER);
+        Label newLabel = new Label(label);
+        newLabel.setWrapText(true);
+        newLabel.setTextAlignment(TextAlignment.CENTER);
         
-        vbox.getChildren().addAll(sizeLabel, sizeTextField);
+        TextField newTextField = new TextField(defValue);
+        newTextField.setId(getID);
+        newTextField.setAlignment(Pos.CENTER);
+        
+        newInputs.add(newTextField);
+
+        vbox.getChildren().addAll(newLabel, newTextField);
         
         return vbox;
     }
@@ -57,16 +73,18 @@ public class Main extends Application {
         vbox.setPadding(new Insets(15, 12, 15, 12));
         vbox.setSpacing(10);   // Gap between nodes
         
-        Button buttonCurrent = new Button("Restart");
-        buttonCurrent.setPrefSize(100, 20);
+        buttonRestart = new Button("Restart");
+        buttonRestart.setOnAction(e -> restartClick());
+        buttonRestart.setPrefSize(100, 20);
         
-        VBox boardSize = addInput("Board Size", "8");
-        VBox obsticalComplexity = addInput("Obstical Complexity Factor", "1");
+        VBox boardSize = addInput("Board Size", "8", "size");
+        VBox obsticalComplexity = addInput(
+                "Obstical Complexity Factor", "1", "complex"
+        );
         
         // Add more components here is desired.
         
-        vbox.getChildren().addAll(
-                buttonCurrent, boardSize, obsticalComplexity
+        vbox.getChildren().addAll(buttonRestart, boardSize, obsticalComplexity
         );
         
         vbox.setAlignment(Pos.TOP_CENTER);
@@ -86,7 +104,9 @@ public class Main extends Application {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 newImageView = new ImageView();
-                newImageView.setImage(new Image(getClass().getResourceAsStream("resources/rover.png")));
+                newImageView.setImage(new Image(
+                        getClass().getResourceAsStream("resources/rover.png")
+                ));
                 newImageView.setFitHeight(baseImageHeigth);
                 newImageView.setPreserveRatio(true);
                 GridPane.setConstraints(newImageView, i, j);
@@ -101,5 +121,22 @@ public class Main extends Application {
         Application.launch(args);
     }
     
+    private void restartClick(){
+        String value = null;
+        
+        //Loop through all nodes of the side bar, read text fields.
+        for (TextField tf: newInputs){
+//            System.out.println();
+            String tfID = tf.getId();
+            if (tfID != null && tfID.equals("size")){
+                value = tf.getText();
+                boardSize = Integer.parseInt(value);
+            } else if (tfID != null && tfID.equals("complex")){
+                value = tf.getText();
+                complexity = Integer.parseInt(value);
+            }
+            System.out.println(value);
+        }
+    }
     
 }
