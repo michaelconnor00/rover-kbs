@@ -38,8 +38,8 @@ public class MainController {
         //set new goal as home base and cause rockslide
         rover.setGoal(world.getTile(0, 0));
         Thread.currentThread().sleep(1000);
-  //      world.causeRockslide(6);
-  //      world.updateTileIcons();
+        world.causeRockslide(6);
+        world.updateTileIcons();
         //going from sample back to home
         while(rover.atGoal() == false)
         {
