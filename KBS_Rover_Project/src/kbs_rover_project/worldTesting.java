@@ -14,7 +14,7 @@ public class worldTesting {
     //creates a random world from the default random world generation method
     public static void createRandomWorld() throws InterruptedException
     {
-        WorldModel model = new WorldModel();
+        WorldModel model = new WorldModel(9, true);
        // model.generateRandomWorld();
        // String testString = model.toString();
        // System.out.print(testString);

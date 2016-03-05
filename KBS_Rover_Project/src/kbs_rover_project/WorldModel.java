@@ -16,26 +16,28 @@ import javax.swing.JLabel;
  */
 public class WorldModel {
     
-    
-    //CONSTRUCTOR
-    //blank constructor
-    public WorldModel() 
-    {
-        
-    }
-    
-    //constructor that sets world size with parameter
-    public WorldModel(int worldSize)
-    {
-        initWorld(worldSize);
-    }
-    
     //PRIVATE MEMBER VARIABLES
     private WorldTile[] theWorld;
     Random RNG = new Random();
     private WorldGUI gui;
+    private int worldSize;
+    
+    //CONSTRUCTORS
+    //constructor that sets world size with parameter
+    public WorldModel(int worldSize, boolean doInit) {
+        this.worldSize = worldSize;
+        if(doInit){
+            this.initWorld(worldSize);
+        }
+        
+    }
     
     //GETTERS & SETTERS
+
+    public int getWorldDim() {
+        // NOTE: this only works because the world is SQUARE
+        return (int) Math.sqrt(worldSize);
+    }
     
     /*
     Returns the array holding all WorldTiles
@@ -57,6 +59,7 @@ public class WorldModel {
     public void setTile(int xCoord, int yCoord, WorldTile newTile)
     {
         int tileLocation = get1DPosition(xCoord, yCoord);
+        newTile.setWorldTile(newTile.getMyType(), tileLocation);
         theWorld[tileLocation] = newTile;
     }
     
@@ -70,7 +73,7 @@ public class WorldModel {
        WorldTile currentTile;
        for(int i = 0; i < theWorld.length; i++)
        {
-           currentTile = new WorldTile();
+           currentTile = new WorldTile(); // defaults to size 8
            currentTile.setWorldTile(TileType.DIRT, i);
            theWorld[i] = currentTile;
        }
@@ -146,7 +149,7 @@ public class WorldModel {
         //with 1 was good enough for now.
         //Design note: always bottom right
 				
-        int sampleLocation = 63;
+        int sampleLocation = worldSize-1;
         blankWorld[sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation);
         blankTiles--;
         positions[sampleLocation] = false;
@@ -228,7 +231,7 @@ public class WorldModel {
                 blankWorld[i].setWorldTile(TileType.DIRT, i);
             }
             
-            if((i == 1) || (i == 8) || (i == 55) || (i == 62))
+            if((i == 1) || (i == worldSize-2))
             {
                 blankWorld[i].setWorldTile(TileType.DIRT, i);
             }
@@ -237,6 +240,139 @@ public class WorldModel {
         
         setWorld(blankWorld);
         
+    }
+    
+    /*
+    Generates a world based on number of obstacles set in parameters
+    */
+    public void generateWorld(int smallRockNum, int largeRockNum, int chasmNum, int crustNum)
+    {
+        
+        WorldTile[] blankWorld = theWorld;
+        int worldSize = blankWorld.length;
+        int blankTiles = worldSize;
+        
+        boolean[] positions = new boolean[worldSize];
+        
+        for (int i = 0; i < worldSize; i++) 
+        {
+            positions[i] = true;
+	}
+        
+        
+        //Pick location for home base:
+        //Design note: always top left
+        int baseLocation = 0;
+        blankWorld[baseLocation].setWorldTile(TileType.HOME_BASE, baseLocation);
+        blankTiles--;
+        positions[baseLocation] = false;
+        
+        
+        //pick location for one sample
+        //Dev note: we can add more samples later, if we want. Figured starting
+        //with 1 was good enough for now.
+        //Design note: always bottom right
+				
+        int sampleLocation = worldSize-1;
+        blankWorld[sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation);
+        blankTiles--;
+        positions[sampleLocation] = false;
+        
+        //spawn small rocks
+        int smallRockLocation;
+        for(int i = 0; i < smallRockNum; i++)
+        {
+            smallRockLocation = RNG.nextInt(worldSize);
+            while (positions[smallRockLocation] == false) 
+            {
+                smallRockLocation = RNG.nextInt(worldSize);
+            }
+            blankWorld[smallRockLocation].setWorldTile(TileType.ROCKS_SMALL, smallRockLocation);
+            blankTiles--;
+            positions[smallRockLocation] = false;
+        }
+        
+        //spawn large rocks
+        int largeRockLocation;
+        for(int i = 0; i < largeRockNum; i++)
+        {
+            largeRockLocation = RNG.nextInt(worldSize);
+            while (positions[largeRockLocation] == false) 
+            {
+                largeRockLocation = RNG.nextInt(worldSize);
+            }
+            blankWorld[largeRockLocation].setWorldTile(TileType.ROCKS_LARGE, largeRockLocation);
+            blankTiles--;
+            positions[largeRockLocation] = false;
+        }
+        
+        //spawn chasms
+        int chasmLocation;
+        for(int i = 0; i < chasmNum; i++)
+        {
+            chasmLocation = RNG.nextInt(worldSize);
+            while (positions[chasmLocation] == false) 
+            {
+                chasmLocation = RNG.nextInt(worldSize);
+            }
+            blankWorld[chasmLocation].setWorldTile(TileType.CHASM, chasmLocation);
+            blankTiles--;
+            positions[chasmLocation] = false;
+        }
+        
+        //spawn crusty sand
+        int crustLocation;
+        for(int i = 0; i < crustNum; i++)
+        {
+            crustLocation = RNG.nextInt(worldSize);
+            while (positions[crustLocation] == false) 
+            {
+                crustLocation = RNG.nextInt(worldSize);
+            }
+            blankWorld[crustLocation].setWorldTile(TileType.CRUST_SAND, crustLocation);
+            blankTiles--;
+            positions[crustLocation] = false;
+        }
+        
+        //fill rest of map with dirt at random inclinations
+        
+        for(int i = 0; i < worldSize; i++)
+        {
+            if(blankWorld[i].getMyType() == TileType.DIRT)
+            {
+                blankWorld[i].setWorldTile(TileType.DIRT, i);
+            }
+            
+            if((i == 1) || (i == worldSize-2))
+            {
+                blankWorld[i].setWorldTile(TileType.DIRT, i);
+            }
+            
+        }
+        
+        setWorld(blankWorld);
+        
+    }
+    
+    
+    /*
+    causes a "rockslide" to occur, adding new large rock terrain 
+    to add difficulty to a returning path
+    */
+    public void causeRockslide(int rocksToAdd)
+    {
+        for(int i = 0; i < rocksToAdd; i++)
+        {
+            int nextTile = RNG.nextInt(theWorld.length-3);
+            //ensures the new rocks do not block the sample or home base
+            while(!theWorld[nextTile].getMyType().equals(TileType.DIRT) || 
+                    nextTile != 1)
+            {
+                nextTile = RNG.nextInt(theWorld.length-3);
+            }
+            
+            theWorld[nextTile].setWorldTile(TileType.ROCKS_LARGE, get1DPosition(theWorld[nextTile].getXCoord(), theWorld[nextTile].getYCoord()));
+        }
     }
     
     @Override
@@ -301,6 +437,7 @@ public class WorldModel {
         return theWorld[coordLocation];
     }
     
+    //NOTE only works for board size 64, antiquated method
     public int getTilePosition(WorldTile tile)
     {
         int xCoord = tile.getXCoord();

@@ -25,14 +25,6 @@ public class WorldTile {
     //CONSTRUCTORS
     public WorldTile(){}
     
-    public WorldTile(TileType tt){
-        this.myType = tt;
-    }
-    
-    public WorldTile(int boardSize){
-        this.boardSize = boardSize;
-    }
-    
     public WorldTile(TileType tt, int boardSize){
         this.myType = tt;
         this.boardSize = boardSize;
@@ -43,9 +35,10 @@ public class WorldTile {
     public void setWorldTile(TileType genType, int coordinate)
     {
         myType = genType;
+        
         xCoord = coordinate % this.boardSize;
         yCoord = coordinate / this.boardSize;
-        //myInclination = inclination;
+
         switch(myType)
         {
             case DIRT:
