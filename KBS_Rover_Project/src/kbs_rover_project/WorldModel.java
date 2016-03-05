@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package kbs_rover_project;
 
 import java.util.Random;
@@ -21,11 +16,14 @@ public class WorldModel {
     Random RNG = new Random();
     private WorldGUI gui;
     private int worldSize;
+    private int boardSize;
+    
     
     //CONSTRUCTORS
     //constructor that sets world size with parameter
-    public WorldModel(int worldSize, boolean doInit) {
-        this.worldSize = worldSize;
+    public WorldModel(int boardSize, boolean doInit) {
+        this.boardSize = boardSize;
+        this.worldSize = boardSize*boardSize;
         if(doInit){
             this.initWorld(worldSize);
         }
@@ -33,6 +31,10 @@ public class WorldModel {
     }
     
     //GETTERS & SETTERS
+
+    public int getBoardSize() {
+        return boardSize;
+    }
 
     public int getWorldDim() {
         // NOTE: this only works because the world is SQUARE

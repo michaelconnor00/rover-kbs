@@ -13,6 +13,22 @@ package kbs_rover_project;
  */
 public enum TileType {
     
-    DIRT, ROCKS_LARGE, ROCKS_SMALL, HOME_BASE, SAMPLE_LOCATION, CHASM, CRUST_SAND
+    DIRT("resources/dirt.png"), 
+    ROCKS_LARGE("resources/largeRock.png"), 
+    ROCKS_SMALL("resources/smallRock.png"), 
+    HOME_BASE("resources/homeBase.png"), 
+    SAMPLE_LOCATION("resources/goal.png"), 
+    CHASM("resources/chasm.png"), 
+    CRUST_SAND("resources/crustSand.png");
+    
+    private String imageName;
+    
+    TileType(String filename){
+        this.imageName = filename;
+    }
+    
+    public String getImageName(){
+        return this.imageName;
+    }
     
 }

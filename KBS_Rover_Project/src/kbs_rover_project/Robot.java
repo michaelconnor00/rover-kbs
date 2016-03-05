@@ -5,6 +5,9 @@
  */
 package kbs_rover_project;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author johnathan Raine
@@ -96,7 +99,7 @@ public class Robot {
      * last position always gets a score of 0.01
      * of bourd positions get a score of -1.0
      */
-    public void chooseMove() {
+    public void chooseMove(){
         //corasponding arrys for chosing the best path
         double[] neighborScores = new double[4];
         WorldTile[] tileOptions = new WorldTile[4];
