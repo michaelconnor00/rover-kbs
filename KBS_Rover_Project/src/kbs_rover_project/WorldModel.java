@@ -365,7 +365,7 @@ public class WorldModel {
         {
             int nextTile = RNG.nextInt(theWorld.length-3);
             //ensures the new rocks do not block the sample or home base
-            while(!theWorld[nextTile].getMyType().equals(TileType.DIRT) || 
+            while(!theWorld[nextTile].getMyType().equals(TileType.DIRT) && 
                     nextTile != 1)
             {
                 nextTile = RNG.nextInt(theWorld.length-3);
