@@ -28,7 +28,7 @@ public class Main extends Application {
     private Button buttonRestart;
     private VBox sideBar;
     private GridPane boardGrid;
-    private int boardSize = 8;
+    private int boardSize = 12;
     private double screenHeight = 830.0;
     private double baseImageHeight;
     private int complexity = 1;
