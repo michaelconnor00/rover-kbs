@@ -70,6 +70,15 @@ public class Main extends Application {
         currentWorld.generateRandomWorld();
     }
     
+    
+    private void initWorld(int smallRockNum, int largeRockNum, int chasmNum, 
+            int crustNum){
+        // Create the environment and randomize
+        currentWorld = new WorldModel(boardSize, true);
+        currentWorld.generateWorld(smallRockNum, largeRockNum, chasmNum,
+                crustNum);
+    }
+    
     private void runLoop(){
         
         //Initialize Robot
@@ -128,15 +137,24 @@ public class Main extends Application {
         buttonRestart.setPrefSize(100, 20);
         
         VBox boardSizeInput = addInput("Board Size", "8", "size");
-        VBox obsticalComplexity = addInput(
-                "Obstical Complexity Factor", "1", "complex"
+        VBox smallRockSetter = addInput(
+                "Number of Small Rocks", "1", "smallRockNum"
+        );
+        VBox largeRockSetter = addInput(
+                "Number of Large Rocks", "1", "largeRockNum"
+        );
+        VBox chasmSetter = addInput(
+                "Number of Chasms", "1", "chasmNum"
+        );
+        VBox crustSetter = addInput(
+                "Number of Crusty Sand Tiles", "1", "crustNum"
         );
         
         // Add more components here is desired.
         
         vbox.getChildren().addAll(
-                buttonRestart, boardSizeInput, obsticalComplexity
-        );
+                buttonRestart, boardSizeInput, smallRockSetter, largeRockSetter,
+                chasmSetter, crustSetter);
         
         vbox.setAlignment(Pos.TOP_CENTER);
         
@@ -225,6 +243,10 @@ public class Main extends Application {
     
     private void restartClick(){
         String value = null;
+        int smallRockNum = 1;
+        int largeRockNum = 1;
+        int chasmNum = 1;
+        int crustNum = 1;
         
         //Loop through all nodes of the side bar, read text fields.
         for (TextField tf: newInputs){
@@ -232,13 +254,25 @@ public class Main extends Application {
             if (tfID != null && tfID.equals("size")){
                 value = tf.getText();
                 boardSize = Integer.parseInt(value);
-            } else if (tfID != null && tfID.equals("complex")){
+            } else if (tfID != null && tfID.equals("smallRockNum")){
                 value = tf.getText();
-                complexity = Integer.parseInt(value);
+                smallRockNum = Integer.parseInt(value);
+            } 
+            else if (tfID != null && tfID.equals("largeRockRockNum")){
+                value = tf.getText();
+                largeRockNum = Integer.parseInt(value);
+            }
+            else if (tfID != null && tfID.equals("chasmNum")){
+                value = tf.getText();
+                chasmNum = Integer.parseInt(value);
+            }
+            else if (tfID != null && tfID.equals("crustNum")){
+                value = tf.getText();
+                crustNum = Integer.parseInt(value);
             }
             System.out.println(value);
         }
-        initWorld();
+        initWorld(smallRockNum, largeRockNum, chasmNum, crustNum);
         Stage stage = new Stage();
         stage.setScene(addScene());
         stage.sizeToScene();

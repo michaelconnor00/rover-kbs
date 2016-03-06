@@ -92,7 +92,7 @@ public class WorldModel {
     public void generateRandomWorld()
     {
         WorldTile[][] blankWorld = theWorld;
-        int worldSize = blankWorld.length;
+        
         int blankTiles = worldSize;
         
         boolean[] positions = new boolean[worldSize];
@@ -116,7 +116,7 @@ public class WorldModel {
         //with 1 was good enough for now.
         //Design note: always bottom right
 				
-        int sampleLocation = worldSize-1;
+        int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
         blankTiles--;
         positions[sampleLocation] = false;
@@ -124,10 +124,10 @@ public class WorldModel {
         
         //world generation variables
         //Adjust numbers to change chances of spawning each obstacle
-        int randomSmallRockNum = boardSize / 4;
-        int randomLargeRockNum = boardSize / 4;
-        int randomChasmNum = boardSize / 4;
-        int randomCrustNum = boardSize / 4;
+        int randomSmallRockNum = worldSize / 10;
+        int randomLargeRockNum = worldSize / 10;
+        int randomChasmNum = worldSize / 10;
+        int randomCrustNum = worldSize / 10;
         
         //spawn small rocks
         int smallRockNum = RNG.nextInt(randomSmallRockNum);
