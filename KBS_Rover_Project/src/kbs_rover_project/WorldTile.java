@@ -12,8 +12,8 @@ public class WorldTile {
     //PRIVATE MEMBER VARIABLES
     private TileType myType = TileType.DIRT;
     private SurfaceDifficulty myDifficulty;
-    private int xCoord = 0;
-    private int yCoord = 0;
+    private int col = 0;
+    private int row = 0;
     private int boardSize = 8;
     
     //holds inclination values. This will be randomly generated between 0 and 45
@@ -35,8 +35,8 @@ public class WorldTile {
     public void setWorldTile(TileType genType, int xCoord, int yCoord)
     {
         myType = genType;
-        setXCoord(xCoord);
-        setYCoord(yCoord);
+        setCol(xCoord);
+        setRow(yCoord);
         
 
         switch(myType)
@@ -99,31 +99,31 @@ public class WorldTile {
         return myDifficulty;
     }
 
-    public void setXCoord(int xCoord) {
-        this.xCoord = xCoord;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public void setYCoord(int yCoord) {
-        this.yCoord = yCoord;
+    public void setRow(int row) {
+        this.row = row;
     }
     
-    //returns x coordinate of this tile
-    public int getXCoord()
+    //returns col coordinate of this tile
+    public int getCol()
     {
-        return xCoord;
+        return col;
     }
     
-    //returns y coordinate of this tile
-    public int getYCoord()
+    //returns row coordinate of this tile
+    public int getRow()
     {
-        return yCoord;
+        return row;
     }
     
     @Override
     public boolean equals(Object obj){
         boolean is_equal = obj instanceof WorldTile;
-        is_equal = is_equal && ((WorldTile) obj).getXCoord() == this.getXCoord();
-        is_equal = is_equal && ((WorldTile) obj).getYCoord() == this.getYCoord();
+        is_equal = is_equal && ((WorldTile) obj).getCol() == this.getCol();
+        is_equal = is_equal && ((WorldTile) obj).getRow() == this.getRow();
         is_equal = is_equal && ((WorldTile) obj).getMyDifficulty() == this.getMyDifficulty();
         is_equal = is_equal && ((WorldTile) obj).getMyType() == this.getMyType();
         return is_equal;
@@ -133,9 +133,8 @@ public class WorldTile {
     public int hashCode(){
         int hash = 1;
         hash = hash * 31 + this.myType.ordinal();
-//        hash = hash * 31 + this.myDifficulty.ordinal();
-        hash = hash * 31 + this.getXCoord();
-        hash = hash * 31 + this.getYCoord();
+        hash = hash * 31 + this.getCol();
+        hash = hash * 31 + this.getRow();
         return hash;
     }
 }

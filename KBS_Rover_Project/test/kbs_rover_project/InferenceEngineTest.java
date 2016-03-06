@@ -19,23 +19,23 @@ public class InferenceEngineTest {
     @BeforeClass
     public static void setUpClass() {
         wtGoal = new WorldTile(TileType.DIRT, 4);
-        wtGoal.setXCoord(3);
-        wtGoal.setYCoord(3);
+        wtGoal.setCol(3);
+        wtGoal.setRow(3);
         wtPassable = new WorldTile(TileType.DIRT, 4);
-        wtPassable.setXCoord(1);
-        wtPassable.setYCoord(1);
+        wtPassable.setCol(1);
+        wtPassable.setRow(1);
         wtBlocking = new WorldTile(TileType.ROCKS_LARGE, 4);
-        wtBlocking.setXCoord(1);
-        wtBlocking.setYCoord(1);
+        wtBlocking.setCol(1);
+        wtBlocking.setRow(1);
         wtDifficult = new WorldTile(TileType.ROCKS_SMALL, 4);
-        wtDifficult.setXCoord(1);
-        wtDifficult.setYCoord(1);
+        wtDifficult.setCol(1);
+        wtDifficult.setRow(1);
         testEngine = new InferenceEngine(wtGoal);
     }
     
     private double distToGoal(WorldTile currTile){
-        int xdiff = wtGoal.getXCoord() - currTile.getXCoord();
-        int ydiff = wtGoal.getYCoord() - currTile.getYCoord();
+        int xdiff = wtGoal.getCol() - currTile.getCol();
+        int ydiff = wtGoal.getRow() - currTile.getRow();
         return  Math.sqrt(Math.pow((double) xdiff, 2) + Math.pow((double) ydiff, 2));
     }
 

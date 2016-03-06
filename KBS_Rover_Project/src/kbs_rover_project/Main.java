@@ -162,16 +162,16 @@ public class Main extends Application {
 
         ImageView newImageView;
         String imageName;
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                imageName = currentWorld.getTile(j, i).getMyType().getImageName();
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                imageName = currentWorld.getTile(col, row).getMyType().getImageName();
                 newImageView = getImageView(imageName);
                 newImageView.setImage(new Image(
                         getClass().getResourceAsStream(imageName)
                 ));
                 newImageView.setFitHeight(baseImageHeight);
                 newImageView.setPreserveRatio(true);
-                GridPane.setConstraints(newImageView, i, j);
+                GridPane.setConstraints(newImageView, row, col);
                 grid.getChildren().add(newImageView);
             }
         }
@@ -202,8 +202,8 @@ public class Main extends Application {
     private void setToGrid(GridPane currentGrid, WorldTile loc, ImageView newImageView){
         GridPane.setConstraints(
                 newImageView, 
-                loc.getYCoord(), 
-                loc.getXCoord()
+                loc.getRow(), 
+                loc.getCol()
         );
         currentGrid.getChildren().add(newImageView);
 //        boardGrid.requestLayout();
@@ -299,7 +299,7 @@ public class Main extends Application {
         moveRover(next, current);
         
         System.out.println(
-            "Next: " + next.getXCoord() + ", " + next.getYCoord()
+            "Next: " + next.getCol() + ", " + next.getRow()
         );
     }
     

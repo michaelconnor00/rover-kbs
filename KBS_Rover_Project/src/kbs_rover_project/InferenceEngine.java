@@ -17,8 +17,8 @@ public class InferenceEngine {
     
     public InferenceEngine(WorldTile goalTile){
         this.initEngine();
-        this.goalXCoord = goalTile.getXCoord();
-        this.goalYCoord = goalTile.getYCoord();
+        this.goalXCoord = goalTile.getCol();
+        this.goalYCoord = goalTile.getRow();
     }
     
     private void initEngine(){
@@ -40,7 +40,7 @@ public class InferenceEngine {
         int[] history = this.pathData.getHistory(environment);
         
         double nextScore = (double) nextAction.getScore() / this.distanceToGoal(
-                environment.getXCoord(), environment.getYCoord()
+                environment.getCol(), environment.getRow()
         );
         
         if (history.length > 0 && history[travelDirection] == 1){
@@ -69,8 +69,8 @@ public class InferenceEngine {
     }
     
     public void setGoal(WorldTile newGoal){
-        this.goalXCoord = newGoal.getXCoord();
-        this.goalYCoord = newGoal.getYCoord();
+        this.goalXCoord = newGoal.getCol();
+        this.goalYCoord = newGoal.getRow();
     }
     
     /**

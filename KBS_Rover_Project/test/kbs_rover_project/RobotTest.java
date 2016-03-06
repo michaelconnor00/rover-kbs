@@ -57,8 +57,8 @@ public class RobotTest {
         int expX = 0;
         int expY = 1;
         
-        assertEquals(expX, nextTile.getXCoord());
-        assertEquals(expY, nextTile.getYCoord());
+        assertEquals(expX, nextTile.getCol());
+        assertEquals(expY, nextTile.getRow());
         
     }
     
@@ -78,8 +78,8 @@ public class RobotTest {
         int expX = 0;
         int expY = 0;
         
-        assertEquals(expX, nextTile.getXCoord());
-        assertEquals(expY, nextTile.getYCoord());
+        assertEquals(expX, nextTile.getCol());
+        assertEquals(expY, nextTile.getRow());
         
     }
     
@@ -101,8 +101,8 @@ public class RobotTest {
         int expX = 0;
         int expY = 0;
         
-        assertEquals(expX, nextTile.getXCoord());
-        assertEquals(expY, nextTile.getYCoord());
+        assertEquals(expX, nextTile.getCol());
+        assertEquals(expY, nextTile.getRow());
         
     }
         

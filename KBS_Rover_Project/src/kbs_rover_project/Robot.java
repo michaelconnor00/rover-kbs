@@ -104,8 +104,8 @@ public class Robot {
         double[] neighborScores = new double[4];
         WorldTile[] tileOptions = new WorldTile[4];
 
-        int currentX = current.getXCoord();
-        int currentY = current.getYCoord();
+        int currentX = current.getCol();
+        int currentY = current.getRow();
         
         int[][] coordOffsetTuples = {
             {1,0}, {0,1}, {-1,0}, {0,-1}

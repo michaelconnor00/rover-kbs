@@ -431,8 +431,8 @@ public class WorldModel {
     //NOTE only works for board size 64, antiquated method
     public int getTilePosition(WorldTile tile)
     {
-        int xCoord = tile.getXCoord();
-        int yCoord = tile.getYCoord();
+        int xCoord = tile.getCol();
+        int yCoord = tile.getRow();
         
         int position = xCoord + (8 * yCoord);
         return position;
