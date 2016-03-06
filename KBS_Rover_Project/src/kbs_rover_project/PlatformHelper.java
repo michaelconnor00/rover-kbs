@@ -3,29 +3,6 @@ package kbs_rover_project;
 import javafx.application.Platform;
 
 
-
-/**
- *
- * @author michaelconnor
- */
-//public class GridUpdater implements Runnable {
-//
-//    public void run() {
-//        GridPane.setConstraints(
-//                newImageView, 
-//                loc.getYCoord(), 
-//                loc.getXCoord()
-//        );
-//        currentGrid.getChildren().add(newImageView);
-////        boardGrid.requestLayout();
-//    }
-//
-//    public static void main(String args[]) {
-//        (new Thread(new HelloRunnable())).start();
-//    }
-//
-//}
-
 public class PlatformHelper {
  
     public static void run(Runnable treatment) {
@@ -33,5 +10,11 @@ public class PlatformHelper {
  
         if(Platform.isFxApplicationThread()) treatment.run();
         else Platform.runLater(treatment);
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            System.err.println("Yo");
+        }
     }
 }
