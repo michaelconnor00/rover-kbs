@@ -261,7 +261,7 @@ public class WorldModel {
         int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
         blankTiles--;
-        positions[sampleLocation] = false;
+        positions[worldSize-1] = false;
         
         //spawn small rocks
         randomTiles(smallRockNum, TileType.ROCKS_SMALL, positions, blankWorld);
