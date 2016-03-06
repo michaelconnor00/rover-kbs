@@ -160,6 +160,11 @@ public class Robot {
         {
             logicUnit.updateSensorAction(TileType.CRUST_SAND, MoveAction.DIFFICULT);
         }
+        if(place.getMyType().equals(TileType.ROCKS_SMALL))
+        {
+            logicUnit.updateSensorAction(TileType.ROCKS_SMALL, MoveAction.PASSABLE);
+        }
+        
         last = current;
         current = place;
     }
