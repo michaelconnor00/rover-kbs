@@ -6,29 +6,26 @@ import javafx.util.Duration;
 
 
 public class PlatformHelper {
+    
+    private static void delay(int mSec){
+        long newMilli = System.currentTimeMillis() + mSec;
+        while (System.currentTimeMillis() < newMilli){
+            // Do nothing.
+        }
+    }
  
     public static void run(Runnable treatment) {
         if(treatment == null) throw new IllegalArgumentException("The treatment to perform can not be null");
  
         if(Platform.isFxApplicationThread()) { 
-            PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
             pause.setOnFinished(e -> treatment.run());
             pause.play();
-//            treatment.run();
-            System.out.println("FxThread");
+//            delay(1000);
         }
         else { 
             Platform.runLater(treatment);
-            System.out.println("NotFxThread");
         }
-        
-        Sleep pause = new Sleep();
-        pause.start();
-        
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException ex) {
-//            System.out.println("Yo");
-//        }
+
     }
 }

@@ -25,11 +25,13 @@ public class Main extends Application {
     private Stage primaryStage;
     private WorldModel currentWorld;
     private Button buttonRestart;
+    private Button buttonStep;
     private VBox sideBar;
     private GridPane boardGrid;
-    private int boardSize = 12;
+    private int boardSize = 8;
     private double screenHeight = 830.0;
     private double baseImageHeight;
+    private Robot rover;
     private int complexity = 1;
     private ArrayList<TextField> newInputs = new ArrayList<>();
     
@@ -45,8 +47,16 @@ public class Main extends Application {
         
         primaryStage = stage;
         
-        // Run Rover Loop
-        runLoop();
+        //Initialize Robot
+        rover = new Robot(
+                currentWorld, 
+                currentWorld.getTile(0, 0), 
+                currentWorld.getTile(boardSize-1, boardSize-1)
+        );
+        
+        // Save rover current tile
+        // Add Rover image to board
+        setRover(rover.getCurrentPlace());
     }
     
     private Scene addScene(){
@@ -68,33 +78,6 @@ public class Main extends Application {
         // Create the environment and randomize
         currentWorld = new WorldModel(boardSize, true);
         currentWorld.generateRandomWorld();
-    }
-    
-    private void runLoop(){
-        
-        //Initialize Robot
-        Robot rover = new Robot(
-                currentWorld, currentWorld.getTile(0, 0), currentWorld.getTile(boardSize-1, boardSize-1)
-        );
-        
-        // Save rover current tile
-        WorldTile current = rover.getCurrentPlace();
-        // Add Rover image to board
-        setRover(current);
-        
-        WorldTile next;
-        
-        while (rover.atGoal() == false){
-            rover.chooseMove();
-            next = rover.getCurrentPlace();
-            moveRover(next, current);
-            System.out.println(
-                "Next: " + next.getXCoord() + ", " + next.getYCoord()
-            );
-            current = rover.getCurrentPlace();
-//            sleep();
-        }
-
     }
     
     private VBox addInput(String label, String defValue, String getID){
@@ -123,6 +106,10 @@ public class Main extends Application {
         vbox.setPadding(new Insets(15, 12, 15, 12));
         vbox.setSpacing(10);   // Gap between nodes
         
+        buttonStep = new Button("Step");
+        buttonStep.setOnAction(e -> step());
+        buttonStep.setPrefSize(100, 20);
+        
         buttonRestart = new Button("Restart");
         buttonRestart.setOnAction(e -> restartClick());
         buttonRestart.setPrefSize(100, 20);
@@ -132,10 +119,12 @@ public class Main extends Application {
                 "Obstical Complexity Factor", "1", "complex"
         );
         
-        // Add more components here is desired.
         
         vbox.getChildren().addAll(
-                buttonRestart, boardSizeInput, obsticalComplexity
+                buttonStep,
+                buttonRestart, 
+                boardSizeInput, 
+                obsticalComplexity
         );
         
         vbox.setAlignment(Pos.TOP_CENTER);
@@ -245,7 +234,37 @@ public class Main extends Application {
         stage.show();
         primaryStage.close();
         primaryStage = stage;
-        runLoop();
+        //Initialize Robot
+        rover = new Robot(
+                currentWorld, 
+                currentWorld.getTile(0, 0), 
+                currentWorld.getTile(boardSize-1, boardSize-1)
+        );
+        
+        // Add Rover image to board
+        setRover(rover.getCurrentPlace());
+    }
+    
+    private void step(){
+        WorldTile current;
+        WorldTile next;
+        
+        current = rover.getCurrentPlace();
+        
+        if(rover.atGoal()){
+            if (current.getMyType() == TileType.HOME_BASE) return;
+            else rover.setGoal(currentWorld.getTile(0, 0));
+        }
+        
+        rover.chooseMove();
+        
+        next = rover.getCurrentPlace();
+
+        moveRover(next, current);
+        
+        System.out.println(
+            "Next: " + next.getXCoord() + ", " + next.getYCoord()
+        );
     }
     
 }
