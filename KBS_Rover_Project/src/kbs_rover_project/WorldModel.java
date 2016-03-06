@@ -227,7 +227,6 @@ public class WorldModel {
     {
         
         WorldTile[][] blankWorld = theWorld;
-        int worldSize = blankWorld.length;
         int blankTiles = worldSize;
         
         boolean[] positions = new boolean[worldSize];
@@ -251,7 +250,7 @@ public class WorldModel {
         //with 1 was good enough for now.
         //Design note: always bottom right
 				
-        int sampleLocation = worldSize-1;
+        int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
         blankTiles--;
         positions[sampleLocation] = false;
