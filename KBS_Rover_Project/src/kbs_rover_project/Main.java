@@ -27,7 +27,8 @@ public class Main extends Application {
     
     private Stage primaryStage;
     private WorldModel currentWorld;
-    private PauseTransition gridImageChange;
+    private ImageView[][] gridImageViews;
+    private PauseTransition imageTransition = new PauseTransition(Duration.seconds(1.0));
     private Button buttonRestart;
     private VBox sideBar;
     private GridPane boardGrid;
@@ -48,8 +49,6 @@ public class Main extends Application {
         stage.show();
         
         primaryStage = stage;
-        
-        gridImageChange = new PauseTransition(Duration.seconds(1.0));
         
         // Run Rover Loop
         runLoop();
@@ -89,8 +88,8 @@ public class Main extends Application {
         setRover(current);
         
         WorldTile next;
-//        
-        while (rover.atGoal() == false){
+        
+//        while (rover.atGoal() == false){
             rover.chooseMove();
             next = rover.getCurrentPlace();
             moveRover(next, current);
@@ -99,7 +98,7 @@ public class Main extends Application {
                 "Next: " + next.getXCoord() + ", " + next.getYCoord()
             );
             current = rover.getCurrentPlace();
-        }
+//        }
 
     }
     
@@ -157,19 +156,19 @@ public class Main extends Application {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
 
-        ImageView newImageView;
+        gridImageViews = new ImageView[size][size];
         String imageName;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 imageName = currentWorld.getTile(j, i).getMyType().getImageName();
-                newImageView = getImageView(imageName);
-                newImageView.setImage(new Image(
+                gridImageViews[i][j] = getImageView(imageName);
+                gridImageViews[i][j].setImage(new Image(
                         getClass().getResourceAsStream(imageName)
                 ));
-                newImageView.setFitHeight(baseImageHeight);
-                newImageView.setPreserveRatio(true);
-                GridPane.setConstraints(newImageView, i, j);
-                grid.getChildren().add(newImageView);
+                gridImageViews[i][j].setFitHeight(baseImageHeight);
+                gridImageViews[i][j].setPreserveRatio(true);
+                GridPane.setConstraints(gridImageViews[i][j], i, j);
+                grid.getChildren().add(gridImageViews[i][j]);
             }
         }
 
@@ -188,15 +187,17 @@ public class Main extends Application {
 
     private void setRover(WorldTile loc){
         ImageView newImageView = getImageView("resources/rover.png");
-//        gridImageChange.setOnFinished(e -> setToGrid(boardGrid, loc, newImageView));
-//        gridImageChange.play();
+//        gridImageViews[loc.getYCoord()][loc.getXCoord()] = getImageView("resources/rover.png");
+//        boardGrid.requestLayout();
+//        gridImageViews[loc.getYCoord()][loc.getXCoord()] = getImageView("resources/rover.png");
+//        PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
+//        pause.setOnFinished(e -> setToGrid(boardGrid, loc, newImageView));
+//        pause.play();
         PlatformHelper.run(() -> setToGrid(boardGrid, loc, newImageView));
     }
     
     private void setTile(WorldTile loc){
         ImageView newImageView = getImageView(loc.getMyType().getImageName());
-//        gridImageChange.setOnFinished(e -> setToGrid(boardGrid, loc, newImageView));
-//        gridImageChange.play();
         PlatformHelper.run(() -> setToGrid(boardGrid, loc, newImageView));
     }
     
