@@ -262,7 +262,7 @@ public class WorldModel {
         int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
         blankTiles--;
-        positions[sampleLocation] = false;
+        positions[worldSize-1] = false;
         
         //spawn small rocks
         int smallRockLocation;
@@ -328,24 +328,7 @@ public class WorldModel {
             positions[crustLocation] = false;
         }
         
-        //fill rest of map with dirt at random inclinations
         
-        for(int row = 0; row < boardSize; row++)
-        {
-            for(int col = 0; col < boardSize; col++)
-            {
-                if(blankWorld[row][col].getMyType() == TileType.DIRT)
-                {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
-                }
-            
-                if((row*col == 1) || (row*col == worldSize-2))
-                {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
-                }
-            }
-            
-        }
         
         setWorld(blankWorld);
         
