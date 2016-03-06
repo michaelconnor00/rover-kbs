@@ -75,8 +75,8 @@ public class WorldModel {
        {
            for(int col=0;col < boardSize; col++)
            {
-           currentTile = new WorldTile(TileType.DIRT, boardSize); // defaults to size 8
-           currentTile.setWorldTile(TileType.DIRT, row,col);
+           currentTile = new WorldTile(TileType.DIRT, col, row);
+           currentTile.setWorldTile(TileType.DIRT, col ,row);
            theWorld[row][col] = currentTile;
            }
        }
@@ -205,12 +205,12 @@ public class WorldModel {
             {
                 if(blankWorld[row][col].getMyType() == TileType.DIRT)
                 {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, col, row);
                 }
             
                 if((row*col == 1) || (row*col == worldSize-2))
                 {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, col, row);
                 }
             }
             
@@ -226,7 +226,7 @@ public class WorldModel {
     public void generateWorld(int smallRockNum, int largeRockNum, int chasmNum, int crustNum)
     {
         
-        WorldTile[][] blankWorld = theWorld;
+        WorldTile[][] blankWorld = new WorldTile[boardSize][boardSize];
         int blankTiles = worldSize;
         
         boolean[] positions = new boolean[worldSize];
@@ -241,7 +241,7 @@ public class WorldModel {
         {
             for(int col = 0; col < boardSize; col++)
             {
-                blankWorld[row][col].setWorldTile(TileType.DIRT, row, col);
+                blankWorld[row][col] = new WorldTile(TileType.DIRT, col, row);
             }
         }
         

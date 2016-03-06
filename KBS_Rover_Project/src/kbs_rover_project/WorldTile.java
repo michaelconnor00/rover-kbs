@@ -14,7 +14,6 @@ public class WorldTile {
     private SurfaceDifficulty myDifficulty;
     private int col = 0;
     private int row = 0;
-    private int boardSize = 8;
     
     //holds inclination values. This will be randomly generated between 0 and 45
     //John, you can pick a value to be deemed 'difficult'. Maybe >30 for dirt,
@@ -25,9 +24,10 @@ public class WorldTile {
     //CONSTRUCTORS
     public WorldTile(){}
     
-    public WorldTile(TileType tt, int boardSize){
+    public WorldTile(TileType tt, int col, int row){
         this.myType = tt;
-        this.boardSize = boardSize;
+        this.col = col;
+        this.row = row;
     }
     
     

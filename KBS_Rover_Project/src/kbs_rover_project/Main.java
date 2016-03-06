@@ -39,6 +39,8 @@ public class Main extends Application {
     public void start(Stage stage){
         stage.setTitle("KBS Rover");
         
+        initWorld();
+        
         Scene scene = addScene();
         
         stage.setScene(scene);
@@ -62,8 +64,6 @@ public class Main extends Application {
     private Scene addScene(){
         HBox mainGroup = new HBox();
         mainGroup.setAlignment(Pos.TOP_LEFT);
-        
-        initWorld();
         
         sideBar = addVBox();
         boardGrid = addGridPane(boardSize, screenHeight);
