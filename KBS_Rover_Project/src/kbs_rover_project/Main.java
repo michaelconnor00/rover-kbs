@@ -279,7 +279,11 @@ public class Main extends Application {
         
         if(rover.atGoal()){
             if (current.getMyType() == TileType.HOME_BASE) return;
-            else rover.setGoal(currentWorld.getTile(0, 0));
+            else
+            {
+                rover.setGoal(currentWorld.getTile(0, 0));
+                currentWorld.causeRockslide(5);
+            }
         }
         
         rover.chooseMove();
