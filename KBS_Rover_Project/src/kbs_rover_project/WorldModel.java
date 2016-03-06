@@ -58,9 +58,9 @@ public class WorldModel {
     }
     
     
-    public void setTile(int xCoord, int yCoord, WorldTile newTile)
+    public void setTile(int col, int row, WorldTile newTile)
     {
-        theWorld[xCoord][yCoord] = newTile;
+        theWorld[col][row] = newTile;
     }
     
     
@@ -71,13 +71,13 @@ public class WorldModel {
     {
        theWorld = new WorldTile[boardSize][boardSize];
        WorldTile currentTile;
-       for(int i = 0; i < boardSize; i++)
+       for(int row = 0; row < boardSize; row++)
        {
-           for(int j=0;j < boardSize; j++)
+           for(int col=0;col < boardSize; col++)
            {
            currentTile = new WorldTile(TileType.DIRT, boardSize); // defaults to size 8
-           currentTile.setWorldTile(TileType.DIRT, i,j);
-           theWorld[i][j] = currentTile;
+           currentTile.setWorldTile(TileType.DIRT, row,col);
+           theWorld[row][col] = currentTile;
            }
        }
        
@@ -139,9 +139,9 @@ public class WorldModel {
             {
                 smallRockLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = smallRockLocation % boardSize;
-            int yCoord = smallRockLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.ROCKS_SMALL, xCoord, yCoord);
+            int col = smallRockLocation % boardSize;
+            int row = smallRockLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.ROCKS_SMALL, col, row);
             blankTiles--;
             positions[smallRockLocation] = false;
         }
@@ -156,9 +156,9 @@ public class WorldModel {
             {
                 largeRockLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = largeRockLocation % boardSize;
-            int yCoord = largeRockLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.ROCKS_LARGE, xCoord, yCoord);
+            int col = largeRockLocation % boardSize;
+            int row = largeRockLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.ROCKS_LARGE, col, row);
             blankTiles--;
             positions[largeRockLocation] = false;
         }
@@ -173,9 +173,9 @@ public class WorldModel {
             {
                 chasmLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = chasmLocation % boardSize;
-            int yCoord = chasmLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.CHASM, xCoord, yCoord);
+            int col = chasmLocation % boardSize;
+            int row = chasmLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.CHASM, col, row);
             blankTiles--;
             positions[chasmLocation] = false;
         }
@@ -190,27 +190,27 @@ public class WorldModel {
             {
                 crustLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = crustLocation % boardSize;
-            int yCoord = crustLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.CRUST_SAND, xCoord, yCoord);
+            int col = crustLocation % boardSize;
+            int row = crustLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.CRUST_SAND, col, row);
             blankTiles--;
             positions[crustLocation] = false;
         }
         
         //fill rest of map with dirt at random inclinations
         
-        for(int i = 0; i < boardSize; i++)
+        for(int row = 0; row < boardSize; row++)
         {
-            for(int j = 0; j < boardSize; j++)
+            for(int col = 0; col < boardSize; col++)
             {
-                if(blankWorld[i][j].getMyType() == TileType.DIRT)
+                if(blankWorld[row][col].getMyType() == TileType.DIRT)
                 {
-                    blankWorld[i][j].setWorldTile(TileType.DIRT, i,j);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
                 }
             
-                if((i*j == 1) || (i*j == worldSize-2))
+                if((row*col == 1) || (row*col == worldSize-2))
                 {
-                    blankWorld[i][j].setWorldTile(TileType.DIRT, i,j);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
                 }
             }
             
@@ -235,6 +235,15 @@ public class WorldModel {
         {
             positions[i] = true;
 	}
+        
+        //refill map with dirt
+        for(int row = 0; row < boardSize; row++)
+        {
+            for(int col = 0; col < boardSize; col++)
+            {
+                blankWorld[row][col].setWorldTile(TileType.DIRT, row, col);
+            }
+        }
         
         
         //Pick location for home base:
@@ -264,9 +273,9 @@ public class WorldModel {
             {
                 smallRockLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = smallRockLocation % boardSize;
-            int yCoord = smallRockLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.ROCKS_SMALL, xCoord, yCoord);
+            int col = smallRockLocation % boardSize;
+            int row = smallRockLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.ROCKS_SMALL, col, row);
             blankTiles--;
             positions[smallRockLocation] = false;
         }
@@ -280,9 +289,9 @@ public class WorldModel {
             {
                 largeRockLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = largeRockLocation % boardSize;
-            int yCoord = largeRockLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.ROCKS_LARGE, xCoord, yCoord);
+            int col = largeRockLocation % boardSize;
+            int row = largeRockLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.ROCKS_LARGE, col, row);
             blankTiles--;
             positions[largeRockLocation] = false;
         }
@@ -296,9 +305,9 @@ public class WorldModel {
             {
                 chasmLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = chasmLocation % boardSize;
-            int yCoord = chasmLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.CHASM, xCoord, yCoord);
+            int col = chasmLocation % boardSize;
+            int row = chasmLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.CHASM, col, row);
             blankTiles--;
             positions[chasmLocation] = false;
         }
@@ -312,27 +321,27 @@ public class WorldModel {
             {
                 crustLocation = RNG.nextInt(worldSize);
             }
-            int xCoord = crustLocation % boardSize;
-            int yCoord = crustLocation / boardSize;
-            blankWorld[xCoord][yCoord].setWorldTile(TileType.CRUST_SAND, xCoord, yCoord);
+            int col = crustLocation % boardSize;
+            int row = crustLocation / boardSize;
+            blankWorld[col][row].setWorldTile(TileType.CRUST_SAND, col, row);
             blankTiles--;
             positions[crustLocation] = false;
         }
         
         //fill rest of map with dirt at random inclinations
         
-        for(int i = 0; i < boardSize; i++)
+        for(int row = 0; row < boardSize; row++)
         {
-            for(int j = 0; j < boardSize; j++)
+            for(int col = 0; col < boardSize; col++)
             {
-                if(blankWorld[i][j].getMyType() == TileType.DIRT)
+                if(blankWorld[row][col].getMyType() == TileType.DIRT)
                 {
-                    blankWorld[i][j].setWorldTile(TileType.DIRT, i,j);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
                 }
             
-                if((i*j == 1) || (i*j == worldSize-2))
+                if((row*col == 1) || (row*col == worldSize-2))
                 {
-                    blankWorld[i][j].setWorldTile(TileType.DIRT, i,j);
+                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
                 }
             }
             
@@ -352,16 +361,16 @@ public class WorldModel {
         for(int i = 0; i < rocksToAdd; i++)
         {
             int nextTile = RNG.nextInt(worldSize-3);
-            int xCoord = nextTile % boardSize;
-            int yCoord = nextTile / boardSize;
+            int col = nextTile % boardSize;
+            int row = nextTile / boardSize;
             //ensures the new rocks do not block the sample or home base
-            while(!theWorld[xCoord][yCoord].getMyType().equals(TileType.DIRT) || 
+            while(!theWorld[col][row].getMyType().equals(TileType.DIRT) || 
                     nextTile != 1)
             {
                 nextTile = RNG.nextInt(theWorld.length-3);
             }
             
-            theWorld[xCoord][yCoord].setWorldTile(TileType.ROCKS_LARGE, nextTile%boardSize, nextTile/boardSize);
+            theWorld[col][row].setWorldTile(TileType.ROCKS_LARGE, nextTile%boardSize, nextTile/boardSize);
         }
     }
     
