@@ -1,10 +1,8 @@
-
 package kbs_rover_project;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -21,18 +19,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class Main extends Application {
     
     private Stage primaryStage;
     private WorldModel currentWorld;
-    private ImageView[][] gridImageViews;
-    private PauseTransition imageTransition = new PauseTransition(Duration.seconds(1.0));
     private Button buttonRestart;
     private VBox sideBar;
     private GridPane boardGrid;
-    private int boardSize = 8;
+    private int boardSize = 12;
     private double screenHeight = 830.0;
     private double baseImageHeight;
     private int complexity = 1;
@@ -89,16 +84,16 @@ public class Main extends Application {
         
         WorldTile next;
         
-//        while (rover.atGoal() == false){
+        while (rover.atGoal() == false){
             rover.chooseMove();
             next = rover.getCurrentPlace();
             moveRover(next, current);
-            
             System.out.println(
                 "Next: " + next.getXCoord() + ", " + next.getYCoord()
             );
             current = rover.getCurrentPlace();
-//        }
+//            sleep();
+        }
 
     }
     
@@ -156,19 +151,19 @@ public class Main extends Application {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
 
-        gridImageViews = new ImageView[size][size];
+        ImageView newImageView;
         String imageName;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 imageName = currentWorld.getTile(j, i).getMyType().getImageName();
-                gridImageViews[i][j] = getImageView(imageName);
-                gridImageViews[i][j].setImage(new Image(
+                newImageView = getImageView(imageName);
+                newImageView.setImage(new Image(
                         getClass().getResourceAsStream(imageName)
                 ));
-                gridImageViews[i][j].setFitHeight(baseImageHeight);
-                gridImageViews[i][j].setPreserveRatio(true);
-                GridPane.setConstraints(gridImageViews[i][j], i, j);
-                grid.getChildren().add(gridImageViews[i][j]);
+                newImageView.setFitHeight(baseImageHeight);
+                newImageView.setPreserveRatio(true);
+                GridPane.setConstraints(newImageView, i, j);
+                grid.getChildren().add(newImageView);
             }
         }
 
@@ -187,12 +182,6 @@ public class Main extends Application {
 
     private void setRover(WorldTile loc){
         ImageView newImageView = getImageView("resources/rover.png");
-//        gridImageViews[loc.getYCoord()][loc.getXCoord()] = getImageView("resources/rover.png");
-//        boardGrid.requestLayout();
-//        gridImageViews[loc.getYCoord()][loc.getXCoord()] = getImageView("resources/rover.png");
-//        PauseTransition pause = new PauseTransition(Duration.seconds(1.0));
-//        pause.setOnFinished(e -> setToGrid(boardGrid, loc, newImageView));
-//        pause.play();
         PlatformHelper.run(() -> setToGrid(boardGrid, loc, newImageView));
     }
     
@@ -203,9 +192,9 @@ public class Main extends Application {
     
     private void setToGrid(GridPane currentGrid, WorldTile loc, ImageView newImageView){
         GridPane.setConstraints(
-            newImageView, 
-            loc.getYCoord(), 
-            loc.getXCoord()
+                newImageView, 
+                loc.getYCoord(), 
+                loc.getXCoord()
         );
         currentGrid.getChildren().add(newImageView);
 //        boardGrid.requestLayout();
@@ -215,7 +204,17 @@ public class Main extends Application {
         setRover(current);
         setTile(prev);
     }
-   
+    
+    private void sleep(){
+        PlatformHelper.run(() -> new Sleep().start());
+//        try {
+//            //        
+//            Thread.currentThread().sleep(1000);
+//        } catch (InterruptedException ex) {
+//            System.err.println("Hi");
+//        }
+    }
+    
     public static void main(String[] args){
         Application.launch(args);
     }

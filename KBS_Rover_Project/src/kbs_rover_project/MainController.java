@@ -18,18 +18,14 @@ public class MainController {
         // TODO code application logic here
         WorldModel world = new WorldModel(64, true);
         world.generateRandomWorld();
-        world.startGUI();
         Robot rover = new Robot(world, world.getTile(0, 0), world.getTile(7, 7));
-        world.updateRoverLocation(rover.getCurrentPlace());
         //main execution loop
         
         //going from start to sample location
         while(rover.atGoal() == false)
         {
             rover.chooseMove();
-            world.updateRoverLocation(rover.getCurrentPlace());
             Thread.currentThread().sleep(1000);
-            world.updateTileIcons();
             
             System.out.println(rover.getCurrentPlace().getXCoord() + ", " + rover.getCurrentPlace().getYCoord());
             
@@ -44,9 +40,7 @@ public class MainController {
         while(rover.atGoal() == false)
         {
             rover.chooseMove();
-            world.updateRoverLocation(rover.getCurrentPlace());
             Thread.currentThread().sleep(1000);
-            world.updateTileIcons();
 //             System.out.println(rover.getCurrentPlace().getXCoord() + ", " + rover.getCurrentPlace().getYCoord());
         }
     }

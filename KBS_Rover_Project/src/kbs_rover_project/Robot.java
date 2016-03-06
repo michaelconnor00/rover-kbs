@@ -73,7 +73,7 @@ public class Robot {
         // NOTE: this is only applicable for SQUARE worlds!
         // return -1 if out of bounds
         int newCoord = curr + offset;
-        int dim = world.getWorldDim();
+        int dim = world.getBoardSize();
         if (newCoord >= dim){
             return -1; // out of bounds
         } else {

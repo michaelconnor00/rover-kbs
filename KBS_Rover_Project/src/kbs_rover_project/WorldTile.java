@@ -32,12 +32,12 @@ public class WorldTile {
     
     
     //sets tile attributes
-    public void setWorldTile(TileType genType, int coordinate)
+    public void setWorldTile(TileType genType, int xCoord, int yCoord)
     {
         myType = genType;
+        setXCoord(xCoord);
+        setYCoord(yCoord);
         
-        xCoord = coordinate % this.boardSize;
-        yCoord = coordinate / this.boardSize;
 
         switch(myType)
         {
