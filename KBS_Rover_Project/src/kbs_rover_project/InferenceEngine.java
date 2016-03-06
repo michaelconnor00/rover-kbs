@@ -64,8 +64,8 @@ public class InferenceEngine {
         );
     }
     
-    private void updateSensorAction(WorldTile environment, MoveAction newAction){
-        this.sensorData.putAction(environment.getMyType(), newAction);
+    public void updateSensorAction(TileType environment, MoveAction newAction){
+        this.sensorData.putAction(environment, newAction);
     }
     
     public void setGoal(WorldTile newGoal){

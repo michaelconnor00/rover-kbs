@@ -147,7 +147,7 @@ public class Robot {
         // Make sure there was a score over 0.0
         if (max > 0.0){
             move(tileOptions[maxIndex]);
-            logicUnit.addPathScore(tileOptions[maxIndex], maxIndex);
+            logicUnit.addPathScore(tileOptions[maxIndex]);
         } // else, don't make a move.
 
     }
@@ -156,6 +156,10 @@ public class Robot {
      * moves robot
      */
     private void move(WorldTile place) {
+        if(place.getMyType().equals(TileType.CRUST_SAND))
+        {
+            logicUnit.updateSensorAction(TileType.CRUST_SAND, MoveAction.DIFFICULT);
+        }
         last = current;
         current = place;
     }
