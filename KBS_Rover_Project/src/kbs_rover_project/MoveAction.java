@@ -5,8 +5,8 @@ package kbs_rover_project;
  * @author michaelconnor
  */
 public enum MoveAction {
-    DIFFICULT (50), 
-    PASSABLE  (100), 
+    DIFFICULT (500), 
+    PASSABLE  (1000), 
     BLOCKING  (0);
     
     private final int score;

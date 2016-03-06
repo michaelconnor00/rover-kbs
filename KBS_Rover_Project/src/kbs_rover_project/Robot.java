@@ -5,8 +5,7 @@
  */
 package kbs_rover_project;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
 
 /**
  *
@@ -27,7 +26,7 @@ public class Robot {
         current=s;
         last=s;
         goal = g;
-        logicUnit = new InferenceEngine(goal);
+        logicUnit = new InferenceEngine(goal, world.getBoardSize());
         
     }
 
@@ -104,33 +103,28 @@ public class Robot {
         double[] neighborScores = new double[4];
         WorldTile[] tileOptions = new WorldTile[4];
 
-        int currentX = current.getCol();
-        int currentY = current.getRow();
+        int currCol = current.getCol();
+        int currRow = current.getRow();
         
         int[][] coordOffsetTuples = {
-            {1,0}, {0,1}, {-1,0}, {0,-1}
+            {0,1}, {1,0}, {0,-1}, {-1,0}
         };
 
         for (int j = 0; j < neighborScores.length; j++) {
-            int xCoord = getNextCoord(currentX, coordOffsetTuples[j][0]);
-            int yCoord = getNextCoord(currentY, coordOffsetTuples[j][1]);
+            int col = getNextCoord(currCol, coordOffsetTuples[j][0]);
+            int row = getNextCoord(currRow, coordOffsetTuples[j][1]);
             
             // getNextCoord will return -1 if out of bounds
-            boolean coordsOutOfBounds = xCoord < 0 || yCoord < 0;
+            boolean coordsOutOfBounds = col < 0 || row < 0;
                     
             if (coordsOutOfBounds){
                 // Out of Bounds, treat as blocking.
                 neighborScores[j] = -0.1;
                 tileOptions[j] = null; // really, null??
-            } else if (!world.getTile(xCoord, yCoord).equals(last)) {
-                neighborScores[j] = logicUnit.getNextScore(
-                        world.getTile(xCoord, yCoord), 0);
-                tileOptions[j] = world.getTile(xCoord, yCoord);
             } else {
-                // Previous location,
-                // sufficiently low to reduce chance of going backwards
-                neighborScores[j] = 0.1; 
-                tileOptions[j] = last;
+                neighborScores[j] = logicUnit.getNextScore(
+                        world.getTile(col, row), 0);
+                tileOptions[j] = world.getTile(col, row);
             }
         }
         
@@ -144,10 +138,15 @@ public class Robot {
             }
         }
         
+        System.out.println(
+            "Choose: " + Arrays.toString(neighborScores) + ", " +
+            max + ", " + maxIndex
+        );
+        
         // Make sure there was a score over 0.0
         if (max > 0.0){
             move(tileOptions[maxIndex]);
-            logicUnit.addPathScore(tileOptions[maxIndex], maxIndex);
+            logicUnit.addPathScore(tileOptions[maxIndex]);
         } // else, don't make a move.
 
     }

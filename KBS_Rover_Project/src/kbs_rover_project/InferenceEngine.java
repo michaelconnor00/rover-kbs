@@ -8,22 +8,23 @@ public class InferenceEngine {
     
     private EnvironmentDataController sensorData;
     
-    private PathDataController pathData;
+    private int goalCol;
+    private int goalRow;
+    private int boardSize;
+    private int[][] historyMap;
     
-    private int goalXCoord;
-    private int goalYCoord;
+    private final double previouslyVisitedFactor = 0.7;
     
-    private final double previouslyVisitedFactor = 0.5;
-    
-    public InferenceEngine(WorldTile goalTile){
+    public InferenceEngine(WorldTile goalTile, int boardSize){
         this.initEngine();
-        this.goalXCoord = goalTile.getCol();
-        this.goalYCoord = goalTile.getRow();
+        this.goalCol = goalTile.getCol();
+        this.goalRow = goalTile.getRow();
+        this.boardSize = boardSize;
+        this.historyMap = new int[boardSize][boardSize];
     }
     
     private void initEngine(){
         this.sensorData = new EnvironmentDataController();
-        this.pathData = new PathDataController();
         this.initSensorData();
     }
     
@@ -37,59 +38,48 @@ public class InferenceEngine {
     public double getNextScore(WorldTile environment, int travelDirection){
         MoveAction nextAction = this.sensorData.getAction(environment.getMyType());
         
-        int[] history = this.pathData.getHistory(environment);
+        int col = environment.getCol();
+        int row = environment.getRow();
         
         double nextScore = (double) nextAction.getScore() / this.distanceToGoal(
-                environment.getCol(), environment.getRow()
+                col, row
         );
         
-        if (history.length > 0 && history[travelDirection] == 1){
+        if (historyMap[row][col] > 0){
             // Tile has been visited. reduce score to increase chance no to 
             // take the same previous path.
-            return nextScore * previouslyVisitedFactor;
-            
+            System.out.println("History Scale: " + Math.pow(previouslyVisitedFactor, historyMap[row][col]));
+            return nextScore * Math.pow(previouslyVisitedFactor, historyMap[row][col]);
         }
-        // either history == null or the value is not 1 (not visited)
+        
         return nextScore;
     }
     
-    public void updateAction(WorldTile move, MoveAction newAction){
-        this.sensorData.putAction(move.getMyType(), newAction);
-    }
-    
-    private double distanceToGoal(int x, int y){
+    private double distanceToGoal(int col, int row){
         return Math.sqrt(
-            Math.pow((double) (this.goalXCoord - x), 2) + 
-            Math.pow((double) (this.goalYCoord - y), 2)
+            Math.pow((double) (this.goalCol - col), 2) + 
+            Math.pow((double) (this.goalRow - row), 2)
         );
     }
     
-    private void updateSensorAction(WorldTile environment, MoveAction newAction){
-        this.sensorData.putAction(environment.getMyType(), newAction);
+    public void updateSensorAction(TileType environment, MoveAction newAction){
+        this.sensorData.putAction(environment, newAction);
     }
     
     public void setGoal(WorldTile newGoal){
-        this.goalXCoord = newGoal.getCol();
-        this.goalYCoord = newGoal.getRow();
+        this.goalCol = newGoal.getCol();
+        this.goalRow = newGoal.getRow();
     }
     
     /**
      * Function to add visit history to the path data. Adding implies 
-     * the rover has chosen to move to that location. Assign value of 
-     * @param currTile
-     * @param travelDirection: the index that dictates the direction 
-     *  the rover will move.
+     * the rover has chosen to move to that location. 
+     * @param currTile, the tile the rover moved to.
      */
-    public void addPathScore(WorldTile currTile, int travelDirection){
-        if(this.pathData.containsEnv(currTile)){
-            int[] tileHistory = this.pathData.getHistory(currTile);
-            tileHistory[travelDirection] = 1;
-            
-        } else {
-            int[] newTileHistory = new int[4];
-            newTileHistory[travelDirection] = 1;
-            this.pathData.putScores(currTile, newTileHistory);
-        }
+    public void addPathScore(WorldTile currTile){
+        int col = currTile.getCol();
+        int row = currTile.getRow();
+        historyMap[row][col]++;
     }
 
     private void initSensorData() {

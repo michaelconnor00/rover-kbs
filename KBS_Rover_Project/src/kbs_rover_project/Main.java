@@ -230,6 +230,7 @@ public class Main extends Application {
         
         //Loop through all nodes of the side bar, read text fields.
         for (TextField tf: newInputs){
+            value = "";
             String tfID = tf.getId();
             if (tfID != null && tfID.equals("size")){
                 value = tf.getText();
@@ -238,7 +239,7 @@ public class Main extends Application {
                 value = tf.getText();
                 smallRockNum = Integer.parseInt(value);
             } 
-            else if (tfID != null && tfID.equals("largeRockRockNum")){
+            else if (tfID != null && tfID.equals("largeRockNum")){
                 value = tf.getText();
                 largeRockNum = Integer.parseInt(value);
             }
@@ -288,7 +289,7 @@ public class Main extends Application {
         moveRover(next, current);
         
         System.out.println(
-            "Next: " + next.getCol() + ", " + next.getRow()
+            "Moved To: " + next.getCol() + ", " + next.getRow()
         );
     }
     
