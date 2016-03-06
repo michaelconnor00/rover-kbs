@@ -32,11 +32,11 @@ public class WorldTile {
     
     
     //sets tile attributes
-    public void setWorldTile(TileType genType, int xCoord, int yCoord)
+    public void setWorldTile(TileType genType, int col, int row)
     {
         myType = genType;
-        setCol(xCoord);
-        setRow(yCoord);
+        setCol(col);
+        setRow(row);
         
 
         switch(myType)

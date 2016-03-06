@@ -257,98 +257,51 @@ public class WorldModel {
         //pick location for one sample
         //Dev note: we can add more samples later, if we want. Figured starting
         //with 1 was good enough for now.
-        //Design note: always bottom right
-				
+        //Design note: always bottom right			
         int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
         blankTiles--;
         positions[sampleLocation] = false;
         
         //spawn small rocks
-        int smallRockLocation;
-        for(int i = 0; i < smallRockNum; i++)
-        {
-            smallRockLocation = RNG.nextInt(worldSize);
-            while (positions[smallRockLocation] == false) 
-            {
-                smallRockLocation = RNG.nextInt(worldSize);
-            }
-            int col = smallRockLocation % boardSize;
-            int row = smallRockLocation / boardSize;
-            blankWorld[col][row].setWorldTile(TileType.ROCKS_SMALL, col, row);
-            blankTiles--;
-            positions[smallRockLocation] = false;
-        }
+        randomTiles(smallRockNum, TileType.ROCKS_SMALL, positions, blankWorld);
+        blankTiles -= smallRockNum;
         
         //spawn large rocks
-        int largeRockLocation;
-        for(int i = 0; i < largeRockNum; i++)
-        {
-            largeRockLocation = RNG.nextInt(worldSize);
-            while (positions[largeRockLocation] == false) 
-            {
-                largeRockLocation = RNG.nextInt(worldSize);
-            }
-            int col = largeRockLocation % boardSize;
-            int row = largeRockLocation / boardSize;
-            blankWorld[col][row].setWorldTile(TileType.ROCKS_LARGE, col, row);
-            blankTiles--;
-            positions[largeRockLocation] = false;
-        }
+        randomTiles(largeRockNum, TileType.ROCKS_LARGE, positions, blankWorld);
+        blankTiles -= largeRockNum;
         
         //spawn chasms
-        int chasmLocation;
-        for(int i = 0; i < chasmNum; i++)
-        {
-            chasmLocation = RNG.nextInt(worldSize);
-            while (positions[chasmLocation] == false) 
-            {
-                chasmLocation = RNG.nextInt(worldSize);
-            }
-            int col = chasmLocation % boardSize;
-            int row = chasmLocation / boardSize;
-            blankWorld[col][row].setWorldTile(TileType.CHASM, col, row);
-            blankTiles--;
-            positions[chasmLocation] = false;
-        }
+        randomTiles(chasmNum, TileType.CHASM, positions, blankWorld);
+        blankTiles -= chasmNum;
         
         //spawn crusty sand
-        int crustLocation;
-        for(int i = 0; i < crustNum; i++)
-        {
-            crustLocation = RNG.nextInt(worldSize);
-            while (positions[crustLocation] == false) 
-            {
-                crustLocation = RNG.nextInt(worldSize);
-            }
-            int col = crustLocation % boardSize;
-            int row = crustLocation / boardSize;
-            blankWorld[col][row].setWorldTile(TileType.CRUST_SAND, col, row);
-            blankTiles--;
-            positions[crustLocation] = false;
-        }
-        
-        //fill rest of map with dirt at random inclinations
-        
-        for(int row = 0; row < boardSize; row++)
-        {
-            for(int col = 0; col < boardSize; col++)
-            {
-                if(blankWorld[row][col].getMyType() == TileType.DIRT)
-                {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
-                }
-            
-                if((row*col == 1) || (row*col == worldSize-2))
-                {
-                    blankWorld[row][col].setWorldTile(TileType.DIRT, row,col);
-                }
-            }
-            
-        }
+        randomTiles(crustNum, TileType.CRUST_SAND, positions, blankWorld);
+        blankTiles -= crustNum;
         
         setWorld(blankWorld);
         
+    }
+    
+    private void randomTiles(
+            int numOfType, TileType newType, 
+            boolean[] positions, WorldTile[][] blankWorld
+        )
+    {
+        //spawn crusty sand
+        int ranLocation;
+        for(int i = 0; i < numOfType; i++)
+        {
+            ranLocation = RNG.nextInt(worldSize);
+            while (positions[ranLocation] == false) 
+            {
+                ranLocation = RNG.nextInt(worldSize);
+            }
+            int col = ranLocation % boardSize;
+            int row = ranLocation / boardSize;
+            blankWorld[col][row].setWorldTile(newType, col, row);
+            positions[ranLocation] = false;
+        }
     }
     
     
