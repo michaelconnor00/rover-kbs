@@ -206,22 +206,11 @@ public class Main extends Application {
                 loc.getCol()
         );
         currentGrid.getChildren().add(newImageView);
-//        boardGrid.requestLayout();
     }
     
     private void moveRover(WorldTile current, WorldTile prev){
         setRover(current);
         setTile(prev);
-    }
-    
-    private void sleep(){
-        PlatformHelper.run(() -> new Sleep().start());
-//        try {
-//            //        
-//            Thread.currentThread().sleep(1000);
-//        } catch (InterruptedException ex) {
-//            System.err.println("Hi");
-//        }
     }
     
     public static void main(String[] args){
