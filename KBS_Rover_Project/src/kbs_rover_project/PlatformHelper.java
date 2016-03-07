@@ -7,13 +7,7 @@ import javafx.util.Duration;
 
 public class PlatformHelper {
     
-    private static void delay(int mSec){
-        long newMilli = System.currentTimeMillis() + mSec;
-        while (System.currentTimeMillis() < newMilli){
-            // Do nothing.
-        }
-    }
- 
+    
     public static void run(Runnable treatment) {
         if(treatment == null) throw new IllegalArgumentException("The treatment to perform can not be null");
  

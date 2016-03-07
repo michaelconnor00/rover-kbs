@@ -15,15 +15,8 @@ public class WorldTile {
     private int col = 0;
     private int row = 0;
     
-    //holds inclination values. This will be randomly generated between 0 and 45
-    //John, you can pick a value to be deemed 'difficult'. Maybe >30 for dirt,
-    //and >20 for rocks?
-    //private int myInclination;
-    //Dev note: getting rid of inclination for now
     
-    //CONSTRUCTORS
-    public WorldTile(){}
-    
+    //CONSTRUCTOR
     public WorldTile(TileType tt, int col, int row){
         this.myType = tt;
         this.col = col;

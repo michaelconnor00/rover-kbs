@@ -67,6 +67,7 @@ public class Main extends Application {
         
         sideBar = addVBox();
         boardGrid = addGridPane(boardSize, screenHeight);
+        boardGrid.setStyle("-fx-background-color: #B34700;");
         
         mainGroup.getChildren().add(sideBar);
         mainGroup.getChildren().add(boardGrid);
@@ -75,11 +76,14 @@ public class Main extends Application {
     }
     
     private void initWorld(){
-        // Create the environment and randomize
+        // Create the environment and intiialize with a random world
         currentWorld = new WorldModel(boardSize, true);
         currentWorld.generateRandomWorld();
     }
     
+    
+    //for creating subsequent worlds from the GUI. Gives a world with
+    //user-entered parameters for number of each terrain type
     private void initWorld(int smallRockNum, int largeRockNum, int chasmNum, 
             int crustNum){
         // Create the environment and randomize
@@ -88,6 +92,7 @@ public class Main extends Application {
                 crustNum);
     }
     
+    //sets up GUI inputs
     private VBox addInput(String label, String defValue, String getID){
         VBox vbox = new VBox();
         vbox.setPrefWidth(150);
@@ -108,6 +113,7 @@ public class Main extends Application {
         return vbox;
     }
     
+    //sets up specific GUI elements
     private VBox addVBox(){
         VBox vbox = new VBox();
         vbox.setPrefWidth(150);
@@ -124,16 +130,16 @@ public class Main extends Application {
         
         VBox boardSizeInput = addInput("Board Size", "8", "size");
         VBox smallRockSetter = addInput(
-                "Number of Small Rocks", "1", "smallRockNum"
+                "Number of Small Rocks", "10", "smallRockNum"
         );
         VBox largeRockSetter = addInput(
-                "Number of Large Rocks", "1", "largeRockNum"
+                "Number of Large Rocks", "10", "largeRockNum"
         );
         VBox chasmSetter = addInput(
-                "Number of Chasms", "1", "chasmNum"
+                "Number of Chasms", "10", "chasmNum"
         );
         VBox crustSetter = addInput(
-                "Number of Crusty Sand Tiles", "1", "crustNum"
+                "Number of Crusty Sand Tiles", "10", "crustNum"
         );
         
         
@@ -189,6 +195,8 @@ public class Main extends Application {
         return newImageView;
     }
 
+    
+    //sets rover location on the GUI
     private void setRover(WorldTile loc){
         ImageView newImageView = getImageView("resources/rover.png");
         PlatformHelper.run(() -> setToGrid(boardGrid, loc, newImageView));
@@ -221,12 +229,13 @@ public class Main extends Application {
     ////    EVENTS    ////
     //////////////////////
     
+    //resets world with user-entered parameters. resets rover to home
     private void restartClick(){
         String value = null;
-        int smallRockNum = 1;
-        int largeRockNum = 1;
-        int chasmNum = 1;
-        int crustNum = 1;
+        int smallRockNum = 10;
+        int largeRockNum = 10;
+        int chasmNum = 10;
+        int crustNum = 10;
         
         //Loop through all nodes of the side bar, read text fields.
         for (TextField tf: newInputs){
@@ -253,6 +262,8 @@ public class Main extends Application {
             }
             System.out.println(value);
         }
+        
+        //initialize new world with parameters from GUI
         initWorld(smallRockNum, largeRockNum, chasmNum, crustNum);
         Stage stage = new Stage();
         stage.setScene(addScene());
@@ -271,6 +282,7 @@ public class Main extends Application {
         setRover(rover.getCurrentPlace());
     }
     
+    //goes through a single decision cycle for the rover when clicked
     private void step(){
         WorldTile current;
         WorldTile next;

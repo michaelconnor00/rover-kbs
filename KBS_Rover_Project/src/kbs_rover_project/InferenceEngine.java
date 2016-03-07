@@ -62,6 +62,8 @@ public class InferenceEngine {
         );
     }
     
+    //Updates knowledge base about TileTypes, allowing rover to learn about
+    //true difficulty of some types
     public void updateSensorAction(TileType environment, MoveAction newAction){
         this.sensorData.putAction(environment, newAction);
     }
@@ -82,6 +84,8 @@ public class InferenceEngine {
         historyMap[row][col]++;
     }
 
+    
+    //Sets up initial knowledge about each TileType
     private void initSensorData() {
         this.sensorData.putAction(TileType.DIRT, MoveAction.PASSABLE);
         this.sensorData.putAction(TileType.CHASM, MoveAction.BLOCKING);

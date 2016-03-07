@@ -14,7 +14,6 @@ public class WorldModel {
     //PRIVATE MEMBER VARIABLES
     private WorldTile[][] theWorld;
     Random RNG = new Random();
-    private WorldGUI gui;
     private int worldSize;
     private int boardSize;
     
@@ -36,6 +35,7 @@ public class WorldModel {
         return boardSize;
     }
 
+    //world dimensions. Due to GUI form, world will always be square
     public int getWorldDim() {
         // NOTE: this only works because the world is SQUARE
         return boardSize;
@@ -57,7 +57,7 @@ public class WorldModel {
         theWorld = newWorld;
     }
     
-    
+    //sets a specific tile in the world array
     public void setTile(int col, int row, WorldTile newTile)
     {
         theWorld[col][row] = newTile;
@@ -65,7 +65,7 @@ public class WorldModel {
     
     
     /*
-    Initializes world by populating tiles
+    Initializes world by populating tiles with dirt
     */
     public void initWorld(int boardSize) 
     {
@@ -88,7 +88,8 @@ public class WorldModel {
   
     
     
-    //Works only on 64 size worlds
+    //Generates an initial random world, with the number of initial
+    //terrain tiles being a function of the board size
     public void generateRandomWorld()
     {
         WorldTile[][] blankWorld = theWorld;
@@ -124,10 +125,10 @@ public class WorldModel {
         
         //world generation variables
         //Adjust numbers to change chances of spawning each obstacle
-        int randomSmallRockNum = worldSize / 10;
-        int randomLargeRockNum = worldSize / 10;
-        int randomChasmNum = worldSize / 10;
-        int randomCrustNum = worldSize / 10;
+        int randomSmallRockNum = worldSize / 4;
+        int randomLargeRockNum = worldSize / 8;
+        int randomChasmNum = worldSize / 8;
+        int randomCrustNum = worldSize / 4;
         
         //spawn small rocks
         int smallRockNum = RNG.nextInt(randomSmallRockNum);
@@ -255,8 +256,6 @@ public class WorldModel {
         
         
         //pick location for one sample
-        //Dev note: we can add more samples later, if we want. Figured starting
-        //with 1 was good enough for now.
         //Design note: always bottom right			
         int sampleLocation = boardSize-1;
         blankWorld[sampleLocation][sampleLocation].setWorldTile(TileType.SAMPLE_LOCATION, sampleLocation, sampleLocation);
@@ -283,6 +282,7 @@ public class WorldModel {
         
     }
     
+    //sets 'numOfType' tiles of type newType to random positions on the board
     private void randomTiles(
             int numOfType, TileType newType, 
             boolean[] positions, WorldTile[][] blankWorld,
@@ -292,7 +292,6 @@ public class WorldModel {
         if (numOfType > blankTilesRemaining){
             numOfType = blankTilesRemaining;
         }
-        //spawn crusty sand
         int ranLocation;
         for(int i = 0; i < numOfType; i++)
         {
@@ -338,60 +337,5 @@ public class WorldModel {
         return theWorld[row][col];
     }
     
-    /*
-    @Override
-    public String toString()
-    {
-        String worldString = "";
-        TileType currentType;
-        for(int i = 0; i < theWorld.length; i++)
-        {
-            if(i%8 == 0)
-            {
-                worldString = worldString + "\n";
-            }
-            currentType = theWorld[i].getMyType();
-            switch(currentType)
-            {
-                case DIRT:
-                    worldString = worldString + "[ ]";
-                break;
-                
-                case ROCKS_LARGE:
-                    worldString = worldString + "[L]";
-                break;
-                
-                case ROCKS_SMALL:
-                    worldString = worldString + "[S]";
-                break;
-                
-                case HOME_BASE:
-                    worldString = worldString + "[B]";
-                break;
-                
-                case SAMPLE_LOCATION:
-                    worldString = worldString + "[X]";
-                break;
-                
-                case CHASM:
-                    worldString = worldString + "[O]";
-                break;
-                
-                case CRUST_SAND:
-                    worldString = worldString + "[~]";
-                break;
-                
-                default:
-                    worldString = worldString + "[Q]";
-                break;
-                    
-                   
-                       
-            }
-        }
-        
-        return worldString;
-    }
-    */
 }
 

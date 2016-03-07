@@ -10,6 +10,7 @@ package kbs_rover_project;
  * @author Nick Taylor
  * This class is used to hold the enumerated values for each different
  * type of terrain that is represented by the WorldTiles.
+ * Also holds the filepath for the GUI image
  */
 public enum TileType {
     

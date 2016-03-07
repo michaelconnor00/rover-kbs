@@ -17,20 +17,18 @@ public class Robot {
     private WorldModel world;
     private WorldTile goal;
     private WorldTile current;
-    private WorldTile last;
     private InferenceEngine logicUnit;
 
     //given world, start position and inital goal
     public Robot(WorldModel t,WorldTile s, WorldTile g) {
         world = t;
         current=s;
-        last=s;
         goal = g;
         logicUnit = new InferenceEngine(goal, world.getBoardSize());
         
     }
 
-    // geters and setrs
+    // getters and setters
     public void setWorld(WorldModel t) {
         world = t;
     }
@@ -44,13 +42,6 @@ public class Robot {
         current = t;
     }
 
-    public void setLastPlace(WorldTile t) {
-        last = t;
-    }
-    
-    public WorldTile getLastPlace() {
-        return last;
-    }
 
     public WorldTile getCurrentPlace() {
         return current;
@@ -164,7 +155,6 @@ public class Robot {
             logicUnit.updateSensorAction(TileType.ROCKS_SMALL, MoveAction.PASSABLE);
         }
         
-        last = current;
         current = place;
     }
 }
