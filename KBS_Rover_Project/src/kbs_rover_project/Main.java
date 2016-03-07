@@ -294,7 +294,6 @@ public class Main extends Application {
             else
             {
                 rover.setGoal(currentWorld.getTile(0, 0));
-                currentWorld.causeRockslide(5);
             }
         }
         

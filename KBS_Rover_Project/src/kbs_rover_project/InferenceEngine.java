@@ -35,7 +35,7 @@ public class InferenceEngine {
      * @param travelDirection: the index the rover looking to move.
      * @return 
      */
-    public double getNextScore(WorldTile environment, int travelDirection){
+    public double getNextScore(WorldTile environment){
         MoveAction nextAction = this.sensorData.getAction(environment.getMyType());
         
         int col = environment.getCol();

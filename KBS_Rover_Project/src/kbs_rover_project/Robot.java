@@ -102,11 +102,13 @@ public class Robot {
         };
 
         for (int j = 0; j < neighborScores.length; j++) {
-            int col = getNextCoord(currCol, coordOffsetTuples[j][0]);
-            int row = getNextCoord(currRow, coordOffsetTuples[j][1]);
+            int col = currCol + coordOffsetTuples[j][0];
+            int row = currRow + coordOffsetTuples[j][1];
             
             // getNextCoord will return -1 if out of bounds
-            boolean coordsOutOfBounds = col < 0 || row < 0;
+            boolean coordsOutOfBounds = col >= world.getBoardSize() || 
+                    row >= world.getBoardSize() ||
+                    col < 0 || row < 0;
                     
             if (coordsOutOfBounds){
                 // Out of Bounds, treat as blocking.
@@ -114,7 +116,8 @@ public class Robot {
                 tileOptions[j] = null; // really, null??
             } else {
                 neighborScores[j] = logicUnit.getNextScore(
-                        world.getTile(col, row), 0);
+                        world.getTile(col, row));
+                System.out.println("Score: " + col + ", " + row + " - " + neighborScores[j]);
                 tileOptions[j] = world.getTile(col, row);
             }
         }
@@ -129,10 +132,10 @@ public class Robot {
             }
         }
         
-        System.out.println(
-            "Choose: " + Arrays.toString(neighborScores) + ", " +
-            max + ", " + maxIndex
-        );
+//        System.out.println(
+//            "Choose: " + Arrays.toString(neighborScores) + ", " +
+//            max + ", " + maxIndex
+//        );
         
         // Make sure there was a score over 0.0
         if (max > 0.0){
