@@ -18,19 +18,11 @@ public class InferenceEngineTest {
     
     @BeforeClass
     public static void setUpClass() {
-        wtGoal = new WorldTile(TileType.DIRT, 4);
-        wtGoal.setCol(3);
-        wtGoal.setRow(3);
-        wtPassable = new WorldTile(TileType.DIRT, 4);
-        wtPassable.setCol(1);
-        wtPassable.setRow(1);
-        wtBlocking = new WorldTile(TileType.ROCKS_LARGE, 4);
-        wtBlocking.setCol(1);
-        wtBlocking.setRow(1);
-        wtDifficult = new WorldTile(TileType.ROCKS_SMALL, 4);
-        wtDifficult.setCol(1);
-        wtDifficult.setRow(1);
-        testEngine = new InferenceEngine(wtGoal);
+        wtGoal = new WorldTile(TileType.DIRT, 3, 3);
+        wtPassable = new WorldTile(TileType.DIRT, 1, 1);
+        wtBlocking = new WorldTile(TileType.ROCKS_LARGE, 1, 1);
+        wtDifficult = new WorldTile(TileType.ROCKS_SMALL, 1, 1);
+        testEngine = new InferenceEngine(wtGoal, 4);
     }
     
     private double distToGoal(WorldTile currTile){
@@ -45,7 +37,7 @@ public class InferenceEngineTest {
         double expResult = 100.0 / distToGoal(wtPassable);
         double result = testEngine.getNextScore(wtPassable, travelDirection);
         assertEquals(expResult, result, 0.0);
-        testEngine.addPathScore(wtPassable, travelDirection);
+        testEngine.addPathScore(wtPassable);
         expResult *= 0.5;
         result = testEngine.getNextScore(wtPassable, travelDirection);
         assertEquals(expResult, result, 0.0);

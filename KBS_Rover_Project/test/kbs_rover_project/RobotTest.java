@@ -28,10 +28,10 @@ public class RobotTest {
         
         grid3x3 = new WorldModel(9, true);
         
-        start = new WorldTile(TileType.DIRT, 2);
-        rock = new WorldTile(TileType.ROCKS_LARGE, 2);
-        dirt = new WorldTile(TileType.DIRT, 2);
-        goal = new WorldTile(TileType.DIRT, 2);
+        start = new WorldTile(TileType.DIRT, 2, 3);
+        rock = new WorldTile(TileType.ROCKS_LARGE, 2, 1);
+        dirt = new WorldTile(TileType.DIRT, 2, 2);
+        goal = new WorldTile(TileType.DIRT, 2, 0);
         
         
     }
