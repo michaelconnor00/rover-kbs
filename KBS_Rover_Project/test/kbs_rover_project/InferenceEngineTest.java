@@ -35,11 +35,11 @@ public class InferenceEngineTest {
     public void testGetNextScorePassable() {
         int travelDirection = 0;
         double expResult = 100.0 / distToGoal(wtPassable);
-        double result = testEngine.getNextScore(wtPassable, travelDirection);
+        double result = testEngine.getNextScore(wtPassable);
         assertEquals(expResult, result, 0.0);
         testEngine.addPathScore(wtPassable);
         expResult *= 0.5;
-        result = testEngine.getNextScore(wtPassable, travelDirection);
+        result = testEngine.getNextScore(wtPassable);
         assertEquals(expResult, result, 0.0);
     }
     
@@ -47,7 +47,7 @@ public class InferenceEngineTest {
     public void testGetNextScoreDifficult() {
         int travelDirection = 0;
         double expResult = 50.0 / distToGoal(wtDifficult);
-        double result = testEngine.getNextScore(wtDifficult, travelDirection);
+        double result = testEngine.getNextScore(wtDifficult);
         assertEquals(expResult, result, 0.0);
     }
     
@@ -55,7 +55,7 @@ public class InferenceEngineTest {
     public void testGetNextScoreBlocking() {
         int travelDirection = 0;
         double expResult = 0.0 / distToGoal(wtBlocking);
-        double result = testEngine.getNextScore(wtBlocking, travelDirection);
+        double result = testEngine.getNextScore(wtBlocking);
         assertEquals(expResult, result, 0.0);
     }
     
